@@ -262,7 +262,7 @@ export default function Work() {
                           ))}
                         </div>
                         <div className="text-[0.7rem] tracking-[0.14em] text-muted-foreground/70 mt-4">
-                          {p.screenshot}dddd
+                          {p.screenshot}
                         </div>
                       </div>
                     )}
