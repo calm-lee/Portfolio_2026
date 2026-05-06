@@ -38,6 +38,7 @@ const projects: Project[] = [
     ],
     visualTitle: ["Reservation detail", "with map & calendar deep links."],
     name: "Google Maps · Native Calendar integration",
+    screenshot: "/screenshot_deeplink.gif",
   },
   {
     no: "03",
@@ -67,7 +68,7 @@ const projects: Project[] = [
     titleLines: ["Vue.js → Next.js", "migration."],
     about:
       "Re-platformed the legacy Vue.js frontend to Next.js (App Router) without service interruption — preserving every existing route, layout, and SEO surface while modernizing the rendering pipeline.",
-    skills: ["Next.js App Router", "Vue.js", "SSR / SSG", "Lighthouse"],
+    skills: ["Next.js App Router", "Vue.js", "SSR", "Lighthouse"],
     visualTitle: ["Re-platformed surface", "on Next.js App Router."],
     name: "Vue.js → Next.js migration",
     screenshot: "/screenshot_lighthouse.png",
@@ -172,8 +173,17 @@ export default function Work() {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-muted-foreground text-base leading-relaxed mb-4 max-w-[60ch]"
         >
-          Selected projects from a high-traffic online travel platform Tourvis,
-          Privia
+          Selected projects from a high-traffic online travel platform{" "}
+          <a href="https://tourvis.com/activity">
+            <span className="transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+              Tourvis,
+            </span>
+          </a>
+          <a href="https://activity.priviatravel.com/activity/main">
+            <span className="transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+              Privia.
+            </span>
+          </a>
         </motion.p>
 
         {/* Slider */}
@@ -224,7 +234,7 @@ export default function Work() {
                   {/* Visual */}
                   <div
                     ref={i === 0 ? visualRef : undefined}
-                    className="relative aspect-video bg-muted border border-border rounded-lg overflow-hidden flex items-center justify-center text-center p-8"
+                    className="relative aspect-video bg-[var(--bg-color)] border border-border rounded-lg overflow-hidden flex items-center justify-center text-center"
                     style={
                       !p.screenshot
                         ? {
@@ -234,15 +244,11 @@ export default function Work() {
                         : undefined
                     }
                   >
-                    <span className="absolute top-5 right-5 z-10 text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
-                      {pad(i + 1)} / {pad(TOTAL)}
-                    </span>
-
                     {p.screenshot ? (
                       <img
                         src={p.screenshot}
                         alt={p.name}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className={`${p.category.includes("Cross-Browser") ? `max-h-full max-w-full object-contain border border-border` : `absolute w-full h-full object-cover`}`}
                         draggable={false}
                       />
                     ) : (
@@ -256,7 +262,7 @@ export default function Work() {
                           ))}
                         </div>
                         <div className="text-[0.7rem] tracking-[0.14em] text-muted-foreground/70 mt-4">
-                          {p.screenshot}
+                          {p.screenshot}dddd
                         </div>
                       </div>
                     )}
