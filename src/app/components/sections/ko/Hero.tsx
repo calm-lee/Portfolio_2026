@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import portfolioVideo from "@/assets/portfolio_video.mp4";
 
 function scrollToAbout() {
   document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
@@ -9,7 +8,7 @@ export default function Hero() {
   return (
     <div className="relative h-screen flex items-center justify-center bg-[var(--bg-color)]">
       <video
-        src={portfolioVideo}
+        src={`${import.meta.env.BASE_URL}portfolio_video.mp4`}
         autoPlay
         muted
         loop
