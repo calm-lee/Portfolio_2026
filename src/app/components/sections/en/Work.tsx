@@ -1,9 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import screenshotPdf from "@/assets/screenshot_pdf.gif";
-import screenshotDeeplink from "@/assets/screenshot_deeplink.gif";
-import screenshotSearch from "@/assets/screenshot_search.gif";
-import screenshotRestock from "@/assets/screenshot_restock.gif";
-import screenshotLighthouse from "@/assets/screenshot_lighthouse.png";
 import { motion } from "motion/react";
 
 type Project = {
@@ -27,7 +22,7 @@ const projects: Project[] = [
     skills: ["Next.js Middleware", "Blob API", "AWS S3", "iOS Safari"],
     visualTitle: ["PDF download", "inside iOS Safari & in-app WebView."],
     name: "iOS Safari · In-App WebView PDF handling",
-    screenshot: screenshotPdf,
+    screenshot: `${import.meta.env.BASE_URL}screenshot_pdf.gif`,
   },
   {
     no: "02",
@@ -43,7 +38,7 @@ const projects: Project[] = [
     ],
     visualTitle: ["Reservation detail", "with map & calendar deep links."],
     name: "Google Maps · Native Calendar integration",
-    screenshot: screenshotDeeplink,
+    screenshot: `${import.meta.env.BASE_URL}screenshot_deeplink.gif`,
   },
   {
     no: "03",
@@ -54,7 +49,7 @@ const projects: Project[] = [
     skills: ["TanStack Query", "Cache strategy", "REST API"],
     visualTitle: ["Search response", "with cached, deduped queries."],
     name: "Adopting TanStack Query",
-    screenshot: screenshotSearch,
+    screenshot: `${import.meta.env.BASE_URL}screenshot_search.gif`,
   },
   {
     no: "04",
@@ -65,7 +60,7 @@ const projects: Project[] = [
     skills: ["Redux", "Responsive Design", "Notifications"],
     visualTitle: ["Restock notification", "subscription & toast surface."],
     name: "Redux-driven restock alerts",
-    screenshot: screenshotRestock,
+    screenshot: `${import.meta.env.BASE_URL}screenshot_restock.gif`,
   },
   {
     no: "05",
@@ -76,7 +71,7 @@ const projects: Project[] = [
     skills: ["Next.js App Router", "Vue.js", "SSR", "Lighthouse"],
     visualTitle: ["Re-platformed surface", "on Next.js App Router."],
     name: "Vue.js → Next.js migration",
-    screenshot: screenshotLighthouse,
+    screenshot: `${import.meta.env.BASE_URL}screenshot_lighthouse.png`,
   },
 ];
 
