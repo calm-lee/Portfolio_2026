@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 
 type Project = {
   no: string;
@@ -174,16 +175,27 @@ export default function Work() {
           className="text-muted-foreground text-base leading-relaxed mb-4 max-w-[60ch]"
         >
           Selected projects from a high-traffic online travel platform{" "}
-          <a href="https://tourvis.com/activity">
-            <span className="transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
-              Tourvis,
+          <a
+            href="https://tourvis.com/activity"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+              Tourvis
+              <ExternalLink size={11} className="mb-1" />
             </span>
           </a>
-          <a href="https://activity.priviatravel.com/activity/main">
-            <span className="transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
-              Privia.
+          <a
+            href="https://activity.priviatravel.com/activity/main"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+              Privia
+              <ExternalLink size={11} className="mb-1" />
             </span>
           </a>
+          .
         </motion.p>
 
         {/* Slider */}
