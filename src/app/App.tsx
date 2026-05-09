@@ -1,16 +1,15 @@
 import { Routes, Route } from "react-router";
 import LanguageToggle from "./components/common/LanguageToggle";
 import ScrollProgressBar from "./components/common/ScrollProgressBar";
+import Hero from "./components/sections/shared/Hero";
 import Skills from "./components/sections/shared/Skills";
 import Footer from "./components/sections/shared/Footer";
 
-import EnHero from "./components/sections/en/Hero";
 import EnAbout from "./components/sections/en/About";
 import EnExperience from "./components/sections/en/Experience";
 import EnWork from "./components/sections/en/Work";
 import EnContact from "./components/sections/en/Contact";
 
-import KoHero from "./components/sections/ko/Hero";
 import KoAbout from "./components/sections/ko/About";
 import KoExperience from "./components/sections/ko/Experience";
 import KoContact from "./components/sections/ko/Contact";
@@ -20,7 +19,7 @@ function EnLayout() {
     <div className="min-h-screen bg-background text-foreground">
       <ScrollProgressBar />
       <LanguageToggle />
-      <EnHero />
+      <Hero />
       <EnAbout />
       <EnExperience />
       <EnWork />
@@ -36,7 +35,7 @@ function KoLayout() {
     <div className="min-h-screen bg-background text-foreground">
       <ScrollProgressBar />
       <LanguageToggle />
-      <KoHero />
+      <Hero />
       <KoAbout />
       <KoExperience />
       <EnWork />
