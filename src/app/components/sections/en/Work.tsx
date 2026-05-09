@@ -319,7 +319,7 @@ export default function Work() {
             onClick={() => goTo(idx - 1)}
             disabled={idx === 0}
             aria-label="Previous project"
-            className="absolute left-2 md:left-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-border text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none bg-opacity-50"
+            className="absolute left-2 md:left-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none bg-opacity-50"
             style={{ top: arrowTop ?? "50%" }}
           >
             ←
@@ -328,7 +328,7 @@ export default function Work() {
             onClick={() => goTo(idx + 1)}
             disabled={idx === TOTAL - 1}
             aria-label="Next project"
-            className="absolute right-2 md:right-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-border text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
+            className="absolute right-2 md:right-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
             style={{ top: arrowTop ?? "50%" }}
           >
             →
