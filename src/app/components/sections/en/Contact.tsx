@@ -88,7 +88,7 @@ export default function Contact() {
       </div>
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="absolute bottom-10 right-6 md:right-12 z-10 flex items-center justify-center w-10 h-20 rounded-2xl bg-black/4 backdrop-blur-sm hover:bg-black/15 transition-colors border border-black/20 hover:-translate-y-3 transition-transform duration-500 ease-out"
+        className="absolute bottom-10 right-6 md:right-38 z-10 flex items-center justify-center w-10 h-20 rounded-2xl bg-black/4 backdrop-blur-sm hover:bg-black/15 transition-colors border border-black/20 hover:-translate-y-3 transition-transform duration-500 ease-out"
       >
         <svg
           width="16"
