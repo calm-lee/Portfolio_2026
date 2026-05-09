@@ -18,7 +18,7 @@ export default function ScrollProgressBar() {
   return (
     <div className="fixed top-0 right-0 w-[4px] h-full z-50">
       <div
-        className="w-full bg-[#2c2c2c] opacity-40 rounded-b-xl"
+        className="w-full bg-[#6b6765] opacity-40 rounded-b-xl"
         style={{ height: `${progress * 100}%` }}
       />
     </div>
