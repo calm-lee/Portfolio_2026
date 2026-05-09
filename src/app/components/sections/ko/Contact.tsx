@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-32 px-6 md:px-12 text-black">
+    <section id="contact" className="relative py-32 px-6 md:px-12 text-black">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -86,6 +86,35 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="absolute bottom-10 right-6 md:right-12 z-10 flex items-center justify-center w-10 h-20 rounded-2xl bg-black/4 backdrop-blur-sm hover:bg-black/15 transition-colors border border-black/20 hover:-translate-y-3 transition-transform duration-500 ease-out"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 20"
+          fill="none"
+          style={{ transform: "rotate(180deg)" }}
+        >
+          <path
+            d="M4 2l10 8 10-8"
+            stroke="black"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity="0.40"
+          />
+          <path
+            d="M4 11l10 8 10-8"
+            stroke="black"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity="0.20"
+          />
+        </svg>
+      </button>
     </section>
   );
 }
