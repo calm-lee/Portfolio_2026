@@ -47,7 +47,7 @@ export default function Experience() {
             >
               <div className="group py-8 border-t border-border hover:bg-background/50 transition-all duration-300 px-4 -mx-4">
                 <div className="grid md:grid-cols-[200px_1fr] gap-8">
-                  <div className="text-lg text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-5">
+                  <div className="text-lg text-muted-foreground transition-transform duration-300 ease-out">
                     {item.year}
                   </div>
                   <div>
