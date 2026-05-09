@@ -14,7 +14,7 @@ export default function Contact() {
             Contact
           </h2>
           <p className="text-xl mb-12 max-w-[60ch] opacity-80 font-light">
-            새로운 기회와 협업에 항상 열려 있습니다 —{" "}
+            새로운 기회와 아이디어를 나누고 싶으시다면 —{" "}
             <motion.span
               animate={{ y: [0, -8, 0] }}
               transition={{
@@ -24,7 +24,7 @@ export default function Contact() {
               }}
               className="inline-block"
             >
-              편하게 연락 주세요!
+              언제나 환영합니다!
             </motion.span>
           </p>
 
@@ -46,7 +46,7 @@ export default function Contact() {
                 <rect width="20" height="16" x="2" y="4" rx="2" />
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
-              이메일
+              Email
             </a>
             <a
               href="https://www.linkedin.com/in/chloe-lee-21a819229/"
