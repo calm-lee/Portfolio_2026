@@ -11,6 +11,8 @@ type Project = {
   visualTitle: string[];
   name: string;
   screenshot?: string;
+  screenshot_category?: string;
+  mobileLabel?: string;
 };
 
 const projects: Project[] = [
@@ -24,6 +26,8 @@ const projects: Project[] = [
     visualTitle: ["PDF download", "inside iOS Safari & in-app WebView."],
     name: "iOS Safari · In-App WebView PDF handling",
     screenshot: `${import.meta.env.BASE_URL}screenshot_pdf.gif`,
+    screenshot_category: "mo",
+    mobileLabel: "Mobile · iOS / WebView",
   },
   {
     no: "02",
@@ -40,6 +44,8 @@ const projects: Project[] = [
     visualTitle: ["Reservation detail", "with map & calendar deep links."],
     name: "Google Maps · Native Calendar integration",
     screenshot: `${import.meta.env.BASE_URL}screenshot_deeplink.gif`,
+    screenshot_category: "mo",
+    mobileLabel: "Mobile · iOS / Android",
   },
   {
     no: "03",
@@ -51,6 +57,7 @@ const projects: Project[] = [
     visualTitle: ["Search response", "with cached, deduped queries."],
     name: "Adopting TanStack Query",
     screenshot: `${import.meta.env.BASE_URL}screenshot_search.gif`,
+    screenshot_category: "desktop",
   },
   {
     no: "04",
@@ -62,6 +69,7 @@ const projects: Project[] = [
     visualTitle: ["Restock notification", "subscription & toast surface."],
     name: "Redux-driven restock alerts",
     screenshot: `${import.meta.env.BASE_URL}screenshot_restock.gif`,
+    screenshot_category: "desktop",
   },
   {
     no: "05",
@@ -73,6 +81,7 @@ const projects: Project[] = [
     visualTitle: ["Re-platformed surface", "on Next.js App Router."],
     name: "Vue.js → Next.js migration",
     screenshot: `${import.meta.env.BASE_URL}screenshot_lighthouse.png`,
+    screenshot_category: "desktop",
   },
 ];
 
@@ -246,37 +255,79 @@ export default function Work() {
                   {/* Visual */}
                   <div
                     ref={i === 0 ? visualRef : undefined}
-                    className="relative aspect-video bg-[var(--bg-color)] border border-border rounded-lg overflow-hidden flex items-center justify-center text-center"
-                    style={
-                      !p.screenshot
-                        ? {
-                            backgroundImage:
-                              "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px)",
-                          }
-                        : undefined
-                    }
+                    className={`relative border border-border rounded-lg overflow-hidden ${
+                      p.screenshot_category === "mo"
+                        ? "aspect-[1/0.8] py-[1.75rem] md:py-[2.25rem] flex items-center justify-center"
+                        : "aspect-video bg-[var(--bg-color)] flex items-center justify-center text-center"
+                    }`}
+                    style={{
+                      background:
+                        p.screenshot_category === "mo"
+                          ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px), var(--muted, #ececf0)"
+                          : !p.screenshot
+                            ? undefined
+                            : "var(--bg-color)",
+                      backgroundImage:
+                        p.screenshot_category !== "mo" && !p.screenshot
+                          ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px)"
+                          : undefined,
+                    }}
                   >
-                    {p.screenshot ? (
-                      <img
-                        src={p.screenshot}
-                        alt={p.name}
-                        className={`${p.category.includes("Cross-Browser") ? `max-h-full max-w-full object-contain border border-border` : `absolute w-full h-full object-cover`}`}
-                        draggable={false}
-                      />
+                    {p.screenshot_category === "mo" ? (
+                      <>
+                        <div className="relative aspect-[9/19.5] h-[96%] flex-none bg-background border border-border rounded-[1.6rem] overflow-hidden shadow-[0_22px_44px_-22px_rgba(0,0,0,0.25)]">
+                          <div className="absolute top-[0.55rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.4rem] bg-black/15 rounded-full z-10" />
+                          <div className="absolute bottom-[0.55rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.25rem] bg-black/[0.12] rounded-full z-10" />
+                          {p.screenshot ? (
+                            <img
+                              src={p.screenshot}
+                              alt={p.name}
+                              className="absolute inset-0 w-full h-full object-cover"
+                              draggable={false}
+                            />
+                          ) : (
+                            <div
+                              className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
+                              style={{
+                                background:
+                                  "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
+                              }}
+                            >
+                              <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
+                                Screen — Project {pad(i + 1)}
+                              </div>
+                              <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
+                                {p.visualTitle.join(" ")}
+                              </div>
+                              <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mt-4 opacity-75">
+                                [ drop screenshot ]
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </>
                     ) : (
-                      <div className="relative select-none">
-                        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                          Screen — Project {pad(i + 1)}
-                        </div>
-                        <div className="font-serif text-[clamp(1.25rem,2.2vw,1.875rem)] text-foreground/80 leading-[1.18] tracking-[-0.03em] max-w-[32rem] mx-auto">
-                          {p.visualTitle.map((line, li) => (
-                            <div key={li}>{line}</div>
-                          ))}
-                        </div>
-                        <div className="text-[0.7rem] tracking-[0.14em] text-muted-foreground/70 mt-4">
-                          {p.screenshot}
-                        </div>
-                      </div>
+                      <>
+                        {p.screenshot ? (
+                          <img
+                            src={p.screenshot}
+                            alt={p.name}
+                            className="absolute w-full h-full object-cover"
+                            draggable={false}
+                          />
+                        ) : (
+                          <div className="relative select-none">
+                            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                              Screen — Project {pad(i + 1)}
+                            </div>
+                            <div className="font-serif text-[clamp(1.25rem,2.2vw,1.875rem)] text-foreground/80 leading-[1.18] tracking-[-0.03em] max-w-[32rem] mx-auto">
+                              {p.visualTitle.map((line, li) => (
+                                <div key={li}>{line}</div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
 
