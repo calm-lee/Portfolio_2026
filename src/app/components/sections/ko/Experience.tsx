@@ -1,4 +1,32 @@
+import React from "react";
 import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
+
+const tourvisLink = (
+  <a
+    href="https://tourvis.com/activity"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+      투어비스
+      <ExternalLink size={11} className="mb-1" />
+    </span>
+  </a>
+);
+
+const priviaLink = (
+  <a
+    href="https://activity.priviatravel.com/activity/main"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+      프리비아
+      <ExternalLink size={11} className="mb-1" />
+    </span>
+  </a>
+);
 
 const experience = [
   {
@@ -6,8 +34,8 @@ const experience = [
     role: "Frontend Engineer",
     company: "TIDESQUARE · 온라인 여행 플랫폼 · 서울",
     bullets: [
-      "월 45만 명이 이용하는 고트래픽 플랫폼에서 투어&티켓 카테고리 프론트엔드 담당",
-      "React, Next.js, Vue.js를 활용해 웹 서비스 개발 및 유지보수, 사용자 경험과 성능에 집중",
+      <>월 45만 명이 이용하는 여행 플랫폼 {tourvisLink}, {priviaLink}의 투어&티켓 카테고리 프론트엔드 담당</>,
+      "React, Next.js, Vue.js를 활용해 웹 서비스 개발 및 유지보수",
       "레거시 Vue.js 코드베이스를 Next.js SSR로 마이그레이션하여 성능과 SEO 개선",
       "모바일 환경에서의 PDF 뷰어 및 다운로드 문제 해결로 크로스 브라우저 사용자 경험 향상",
       "TanStack Query 도입으로 중복 API 호출 감소 및 응답성 개선",
@@ -56,7 +84,7 @@ export default function Experience() {
                       {item.company}
                     </div>
                     <ul className="space-y-2 max-w-2xl">
-                      {item.bullets.map((bullet, i) => (
+                      {item.bullets.map((bullet: React.ReactNode, i) => (
                         <li
                           key={i}
                           className="text-foreground/70 text-sm leading-relaxed"
