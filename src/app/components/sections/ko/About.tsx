@@ -36,7 +36,7 @@ export default function About() {
               as="p"
               className="transition-transform duration-500 ease-out group-hover:-translate-x-5"
             >
-              환경에 관계없이 매끄러운 UI/UX를 제공하는 데 집중합니다.
+              환경에 상관없이 매끄러운 UI/UX를 제공하는 데 집중합니다.
             </RadiantText>
             <div className="py-3" />
             <RadiantText
