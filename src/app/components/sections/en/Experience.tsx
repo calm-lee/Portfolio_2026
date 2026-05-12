@@ -1,4 +1,31 @@
 import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
+
+const tourvisLink = (
+  <a
+    href="https://tourvis.com/activity"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+      Tourvis
+      <ExternalLink size={11} className="mb-1" />
+    </span>
+  </a>
+);
+
+const priviaLink = (
+  <a
+    href="https://activity.priviatravel.com/activity/main"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
+      Privia
+      <ExternalLink size={11} className="mb-1" />
+    </span>
+  </a>
+);
 
 const experience = [
   {
@@ -6,7 +33,7 @@ const experience = [
     role: "Frontend Engineer",
     company: "TIDESQUARE · Online Travel Platform · Seoul, South Korea",
     bullets: [
-      "Took ownership of the Tour & Ticket category frontend, serving a high-traffic platform with 450K monthly users.",
+      <>Took ownership of the Tour & Ticket category frontend for travel platforms {tourvisLink} and {priviaLink}, serving 450K monthly users.</>,
       "Developed and maintained web services using React, Next.js, and Vue.js, focusing on user experience and performance.",
       "Improved performance and SEO by migrating a legacy Vue.js codebase to Next.js with SSR.",
       "Enhanced cross-browser user experience by resolving PDF viewing and download issues across mobile environments.",
