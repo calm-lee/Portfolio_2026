@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @font-face {
+  font-family: "Jeju Myeongjo";
+  src: url("./fonts/JejuMyeongjo-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Pretendard";
   src: url("./fonts/Pretendard-Regular.woff2") format("woff2");
   font-weight: 400;
