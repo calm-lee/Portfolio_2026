@@ -9,7 +9,7 @@ export default function About() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="grid md:grid-cols-[5fr_5fr] gap-16 items-center"
         >
           <div className="group w-fit">
@@ -18,7 +18,7 @@ export default function About() {
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
                 className="w-[3px] shrink-0 origin-top"
                 style={{ backgroundColor: "#d4cfc9" }}
               />
