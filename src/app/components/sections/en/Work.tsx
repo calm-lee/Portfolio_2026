@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 
 type Project = {
-  no: string;
+  no: number;
   category: string;
-  titleLines: string[];
+  titleLines: ReactNode;
   about: string;
   skills: string[];
   visualTitle: string[];
@@ -17,9 +17,9 @@ type Project = {
 
 const projects: Project[] = [
   {
-    no: "01",
+    no: 1,
     category: "Cross-Browser & Device UX",
-    titleLines: ["iOS Safari · In-App WebView", "PDF handling."],
+    titleLines: "iOS Safari · In-App WebView PDF handling.",
     about:
       "On iOS Safari and embedded in-app webviews, PDF downloads were forced to launch external viewers, breaking users out of the booking context. Re-routed the download path so receipts and itineraries render predictably on every mobile entry point.",
     skills: ["Next.js Middleware", "Blob API", "AWS S3", "iOS Safari"],
@@ -30,9 +30,9 @@ const projects: Project[] = [
     mobileLabel: "Mobile · iOS / WebView",
   },
   {
-    no: "02",
+    no: 2,
     category: "Cross-Browser & Device UX",
-    titleLines: ["Google Maps · Native Calendar", "integration."],
+    titleLines: "Google Maps · Native Calendar integration.",
     about:
       "Reservation details now deep-link directly into the user's native maps and calendar apps with all metadata pre-filled — replacing the multi-step copy/paste workflow that previously fragmented the post-booking experience.",
     skills: [
@@ -48,9 +48,9 @@ const projects: Project[] = [
     mobileLabel: "Mobile · iOS / Android",
   },
   {
-    no: "03",
+    no: 3,
     category: "State Management & Performance",
-    titleLines: ["Adopting", "TanStack Query."],
+    titleLines: "Adopting TanStack Query.",
     about:
       "Replaced ad-hoc fetch hooks with TanStack Query across search, detail, and reservation flows — unifying caching, request deduplication, and invalidation. Loading states became consistent and the entire data layer turned predictable.",
     skills: ["TanStack Query", "Cache strategy", "REST API"],
@@ -60,9 +60,9 @@ const projects: Project[] = [
     screenshot_category: "desktop",
   },
   {
-    no: "04",
+    no: 4,
     category: "State Management & Performance",
-    titleLines: ["Redux-driven", "restock alerts."],
+    titleLines: "Redux-driven restock alerts.",
     about:
       "Designed and built the subscription, polling, and notification layers for a returning-user feature on Redux. Users opt into restock alerts on any listing and are notified the moment availability returns.",
     skills: ["Redux", "Responsive Design", "Notifications"],
@@ -72,9 +72,9 @@ const projects: Project[] = [
     screenshot_category: "desktop",
   },
   {
-    no: "05",
+    no: 5,
     category: "Migration & Optimization",
-    titleLines: ["Vue.js → Next.js", "migration."],
+    titleLines: "Vue.js → Next.js migration.",
     about:
       "Re-platformed the legacy Vue.js frontend to Next.js (App Router) without service interruption — preserving every existing route, layout, and SEO surface while modernizing the rendering pipeline.",
     skills: ["Next.js App Router", "Vue.js", "SSR", "Lighthouse"],
@@ -247,7 +247,7 @@ export default function Work() {
                 transition: trackTransition,
               }}
             >
-              {projects.map((p, i) => (
+              {[...projects].sort((a, b) => a.no - b.no).map((p, i) => (
                 <article
                   key={i}
                   className="flex-[0_0_100%] min-w-0 grid grid-cols-1 gap-8 items-start md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
@@ -340,11 +340,7 @@ export default function Work() {
 
                     {/* Title — regular serif, not italic (per design) */}
                     <h3 className="font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6">
-                      {p.titleLines.map((line, li) => (
-                        <span key={li} className="block">
-                          {line}
-                        </span>
-                      ))}
+                      {p.titleLines}
                     </h3>
 
                     <div className="border-t border-border pt-5 mb-5">
