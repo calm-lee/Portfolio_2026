@@ -14,8 +14,12 @@ export default function About() {
         >
           <div className="group w-fit">
             <div className="flex items-stretch gap-5 transition-transform duration-500 ease-out group-hover:translate-x-3">
-              <span
-                className="w-[3px] shrink-0 scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-out"
+              <motion.span
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="w-[3px] shrink-0 origin-top"
                 style={{ backgroundColor: "#d4cfc9" }}
               />
               <h2 className="text-[clamp(3rem,5vw,5rem)] tracking-normal">
