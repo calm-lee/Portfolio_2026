@@ -12,6 +12,7 @@ import EnContact from "./components/sections/en/Contact";
 
 import KoAbout from "./components/sections/ko/About";
 import KoExperience from "./components/sections/ko/Experience";
+import KoWork from "./components/sections/ko/Work";
 import KoContact from "./components/sections/ko/Contact";
 
 function EnLayout() {
@@ -38,7 +39,7 @@ function KoLayout() {
       <Hero />
       <KoAbout />
       <KoExperience />
-      <EnWork />
+      <KoWork />
       <Skills />
       <KoContact />
       <Footer />
