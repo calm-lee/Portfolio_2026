@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chloe Lee | Frontend Engineer</title>
+    <link rel="icon" href="/Portfolio_2026/favicon.ico" />
+    <title>Chloe Lee | Frontend Engineer ✲</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
@@ -15,10 +16,7 @@
       (function () {
         var p = window.location.search.slice(1);
         if (p.indexOf("p=/") === 0) {
-          var path = p
-            .slice(3)
-            .split("&")[0]
-            .replace(/~and~/g, "&");
+          var path = p.slice(3).split("&")[0].replace(/~and~/g, "&");
           var rest = p.slice(3 + path.length);
           var query =
             rest.indexOf("&q=") === 0
@@ -27,7 +25,7 @@
           window.history.replaceState(
             null,
             null,
-            "/Portfolio_2026/" + path + query + window.location.hash
+            "/Portfolio_2026/" + path + query + window.location.hash,
           );
         }
       })();
@@ -42,8 +40,8 @@
         height: 100%;
       }
     </style>
-    <script type="module" crossorigin src="/Portfolio_2026/assets/index-vLg301mK.js"></script>
-    <link rel="stylesheet" crossorigin href="/Portfolio_2026/assets/index-DFLprkm-.css">
+    <script type="module" crossorigin src="/Portfolio_2026/assets/index-COTMb-mz.js"></script>
+    <link rel="stylesheet" crossorigin href="/Portfolio_2026/assets/index-Ck4uM3Xp.css">
   </head>
 
   <body>
