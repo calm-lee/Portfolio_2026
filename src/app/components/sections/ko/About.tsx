@@ -10,7 +10,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="grid md:grid-cols-[5fr_5fr] gap-16 items-center"
+          className="grid md:grid-cols-[5fr_5fr] gap-10 md:gap-16 items-center"
         >
           <div className="group w-fit">
             <div className="flex items-stretch gap-5 transition-transform duration-500 ease-out group-hover:translate-x-3">
@@ -29,7 +29,7 @@ export default function About() {
               </h2>
             </div>
           </div>
-          <div className="group text-lg text-foreground/70 max-w-[60ch]">
+          <div className="group text-base md:text-lg text-foreground/70 max-w-[60ch]">
             <RadiantText
               as="p"
               className="transition-transform duration-500 ease-out group-hover:-translate-x-5"

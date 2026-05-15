@@ -14,7 +14,7 @@ export default function Contact() {
           <h2 className="text-[clamp(3rem,5vw,5rem)] mb-8 tracking-normal italic">
             Get in touch
           </h2>
-          <p className="text-xl mb-12 max-w-[60ch] opacity-80 font-light">
+          <p className="text-lg md:text-xl mb-8 md:mb-12 max-w-[60ch] opacity-80 font-light">
             I'm always happy to connect and explore new opportunities —{" "}
             <motion.span
               animate={{ y: [0, -8, 0] }}
@@ -29,10 +29,10 @@ export default function Contact() {
             </motion.span>
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <a
               href="mailto:chloe.lee.dev@gmail.com"
-              className="inline-flex items-center justify-center gap-2.5 w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/chloe-lee-21a819229/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ export default function Contact() {
               href="https://github.com/calm-lee"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-40 py-4 border border-black/25 rounded-lg text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
