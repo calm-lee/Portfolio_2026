@@ -33,7 +33,10 @@ const experience = [
     role: "Frontend Engineer",
     company: "TIDESQUARE · Online Travel Platform · Seoul, South Korea",
     bullets: [
-      <>Took ownership of the Tour & Ticket category frontend for travel platforms {tourvisLink} and {priviaLink}, serving 450K monthly users.</>,
+      <>
+        Took ownership of the Tour & Ticket category frontend for travel
+        platforms {tourvisLink} and {priviaLink}, serving 450K monthly users.
+      </>,
       "Developed and maintained web services using React, Next.js, and Vue.js, focusing on user experience and performance.",
       "Improved performance and SEO by migrating a legacy Vue.js codebase to Next.js with SSR.",
       "Enhanced cross-browser user experience by resolving PDF viewing and download issues across mobile environments.",
@@ -47,7 +50,11 @@ const experience = [
 
 export default function Experience() {
   return (
-    <section id="experience" aria-label="Experience" className="py-32 px-6 md:px-12 bg-[var(--bg-color)]">
+    <section
+      id="experience"
+      aria-label="Experience"
+      className="py-32 px-6 md:px-12 bg-[var(--bg-color)]"
+    >
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -74,12 +81,25 @@ export default function Experience() {
             >
               <div className="group py-8 border-t border-border hover:bg-background/50 transition-all duration-300 px-4 -mx-4">
                 <div className="grid md:grid-cols-[200px_1fr] gap-8">
-                  <div className="text-muted-foreground transition-transform duration-300 ease-out">
-                    {item.year}
+                  <div className="flex flex-col items-center h-full gap-4">
+                    <span className="tracking-[0.2em] mt-10 text-xs text-muted-foreground leading-none">
+                      {item.year.split(" — ")[0]}
+                    </span>
+                    <motion.span
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: false, margin: "-100px" }}
+                      transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex-1 block w-[1px] my-3 min-h-[40px] origin-top"
+                      style={{ backgroundColor: "#d4cfc9" }}
+                    />
+                    <span className="tracking-[0.2em] mb-4 text-xs text-muted-foreground leading-none">
+                      {item.year.split(" — ")[1]}
+                    </span>
                   </div>
                   <div>
-                    <h3 className="text-2xl mb-1">{item.role}</h3>
-                    <div className="text-lg mb-3 text-foreground/60">
+                    <h3 className="text-2xl mb-3">{item.role}</h3>
+                    <div className="text-sm mb-3 text-foreground/60">
                       {item.company}
                     </div>
                     <ul className="space-y-2 max-w-2xl">

@@ -34,7 +34,10 @@ const experience = [
     role: "Frontend Engineer",
     company: "TIDESQUARE · 온라인 여행 플랫폼 · 서울",
     bullets: [
-      <>월 45만 명이 이용하는 여행 플랫폼 {tourvisLink}, {priviaLink}의 투어&티켓 카테고리 프론트엔드 담당</>,
+      <>
+        월 45만 명이 이용하는 여행 플랫폼 {tourvisLink}, {priviaLink}의
+        투어&티켓 카테고리 프론트엔드 담당
+      </>,
       "React, Next.js, Vue.js를 활용해 웹 서비스 개발 및 유지보수",
       "레거시 Vue.js 코드베이스를 Next.js SSR로 마이그레이션하여 성능과 SEO 개선",
       "모바일 환경에서의 PDF 뷰어 및 다운로드 문제 해결로 크로스 브라우저 사용자 경험 향상",
@@ -48,7 +51,11 @@ const experience = [
 
 export default function Experience() {
   return (
-    <section id="experience" aria-label="Experience" className="py-32 px-6 md:px-12 bg-[var(--bg-color)]">
+    <section
+      id="experience"
+      aria-label="Experience"
+      className="py-32 px-6 md:px-12 bg-[var(--bg-color)]"
+    >
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -75,12 +82,25 @@ export default function Experience() {
             >
               <div className="group py-8 border-t border-border hover:bg-background/50 transition-all duration-300 px-4 -mx-4">
                 <div className="grid md:grid-cols-[200px_1fr] gap-8">
-                  <div className="text-lg text-muted-foreground transition-transform duration-300 ease-out">
-                    {item.year}
+                  <div className="flex flex-col items-center h-full gap-4">
+                    <span className="tracking-[0.2em] mt-10 text-xs text-muted-foreground leading-none">
+                      {item.year.split(" — ")[0]}
+                    </span>
+                    <motion.span
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: false, margin: "-100px" }}
+                      transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex-1 block w-[1px] my-3 min-h-[40px] origin-top"
+                      style={{ backgroundColor: "#d4cfc9" }}
+                    />
+                    <span className="tracking-[0.2em] mb-2 text-xs text-muted-foreground leading-none">
+                      {item.year.split(" — ")[1]}
+                    </span>
                   </div>
                   <div>
-                    <h3 className="text-2xl mb-1">{item.role}</h3>
-                    <div className="text-lg mb-3 text-foreground/60">
+                    <h3 className="text-2xl mb-3">{item.role}</h3>
+                    <div className="text-sm mb-3 text-foreground/60">
                       {item.company}
                     </div>
                     <ul className="space-y-2 max-w-2xl">
