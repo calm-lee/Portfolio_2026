@@ -266,7 +266,7 @@ export default function Work() {
                     {/* Visual */}
                     <div
                       ref={i === 0 ? visualRef : undefined}
-                      className={`relative border border-border rounded-lg overflow-hidden ${
+                      className={`group relative border border-border rounded-lg overflow-hidden ${
                         p.screenshot_category === "mo"
                           ? "aspect-[1/0.8] py-[1.75rem] md:py-[2.25rem] flex items-center justify-center"
                           : "aspect-video bg-[var(--bg-color)] flex items-center justify-center text-center"
@@ -293,7 +293,7 @@ export default function Work() {
                               <img
                                 src={p.screenshot}
                                 alt={p.name}
-                                className="absolute inset-0 w-full h-full object-cover"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 draggable={false}
                               />
                             ) : (
@@ -323,7 +323,7 @@ export default function Work() {
                             <img
                               src={p.screenshot}
                               alt={p.name}
-                              className="absolute w-full h-full object-cover"
+                              className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                               draggable={false}
                             />
                           ) : (
