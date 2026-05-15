@@ -18,7 +18,7 @@ export default function About() {
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
-                transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
                 className="w-[3px] shrink-0 origin-top"
                 style={{ backgroundColor: "#d4cfc9" }}
               />
