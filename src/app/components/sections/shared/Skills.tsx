@@ -25,7 +25,7 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section className="py-24 pb-32 px-6 md:px-12 bg-[var(--bg-color)]">
+    <section id="skills" aria-label="Skills" className="py-24 pb-32 px-6 md:px-12 bg-[var(--bg-color)]">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -56,16 +56,16 @@ export default function Skills() {
               </div>
               <div className="group/marquee overflow-hidden relative">
                 <div className="flex w-max gap-x-10 [animation:marquee_7s_linear_infinite] group-hover/marquee:[animation-play-state:paused]">
-                  {[...skillGroup.items, ...skillGroup.items].map(
-                    (skill, i) => (
-                      <span
-                        key={i}
-                        className="text-sm font-light whitespace-nowrap"
-                      >
-                        {skill}
-                      </span>
-                    ),
-                  )}
+                  {skillGroup.items.map((skill, i) => (
+                    <span key={i} className="text-sm font-light whitespace-nowrap">
+                      {skill}
+                    </span>
+                  ))}
+                  {skillGroup.items.map((skill, i) => (
+                    <span key={`dup-${i}`} aria-hidden="true" className="text-sm font-light whitespace-nowrap">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </motion.div>

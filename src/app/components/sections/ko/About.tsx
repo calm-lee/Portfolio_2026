@@ -3,7 +3,7 @@ import RadiantText from "../../common/RadiantText";
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6 md:px-12">
+    <section id="about" aria-label="About" className="py-32 px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

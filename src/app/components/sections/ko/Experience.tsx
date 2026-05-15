@@ -48,7 +48,7 @@ const experience = [
 
 export default function Experience() {
   return (
-    <section className="py-32 px-6 md:px-12 bg-[var(--bg-color)]">
+    <section id="experience" aria-label="Experience" className="py-32 px-6 md:px-12 bg-[var(--bg-color)]">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

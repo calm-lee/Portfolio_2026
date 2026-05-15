@@ -7,12 +7,14 @@ function scrollToAbout() {
 export default function Hero() {
   return (
     <div className="relative h-screen flex items-center justify-center bg-[var(--bg-color)]">
+      <h1 className="sr-only">Chloe Lee — Frontend Engineer</h1>
       <video
         src={`${import.meta.env.BASE_URL}portfolio_video.mp4`}
         autoPlay
         muted
         loop
         playsInline
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
@@ -29,9 +31,10 @@ export default function Hero() {
             repeatType: "loop",
           },
         }}
+        aria-label="Scroll to content"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-80 h-10 rounded-2xl bg-white/15 backdrop-blur-sm hover:bg-white/25 transition-colors border border-white/80"
       >
-        <svg width="16" height="16" viewBox="0 0 24 20" fill="none">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 20" fill="none">
           <path
             d="M4 2l10 8 10-8"
             stroke="white"

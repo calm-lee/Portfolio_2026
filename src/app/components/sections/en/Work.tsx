@@ -164,7 +164,7 @@ export default function Work() {
     : "transform 700ms cubic-bezier(.6,.0,.2,1)";
 
   return (
-    <section id="work" className="py-32 px-6 md:px-12">
+    <section id="work" aria-label="Work" className="py-32 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -206,6 +206,10 @@ export default function Work() {
           </a>
           .
         </motion.p>
+
+        <div aria-live="polite" className="sr-only">
+          {[...projects].sort((a, b) => a.no - b.no)[idx]?.name}
+        </div>
 
         {/* Slider */}
         <div ref={sliderRef} className="relative">

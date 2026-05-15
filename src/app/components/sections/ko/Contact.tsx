@@ -3,7 +3,7 @@ import ScrollToTopButton from "@/app/components/common/ScrollToTopButton";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-32 px-6 md:px-12 text-black">
+    <section id="contact" aria-label="Contact" className="relative py-32 px-6 md:px-12 text-black">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -36,6 +36,7 @@ export default function Contact() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -57,6 +58,7 @@ export default function Contact() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -75,6 +77,7 @@ export default function Contact() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="currentColor"

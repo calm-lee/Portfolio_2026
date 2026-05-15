@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router";
 import LanguageToggle from "./components/common/LanguageToggle";
 import ScrollProgressBar from "./components/common/ScrollProgressBar";
@@ -16,33 +17,45 @@ import KoWork from "./components/sections/ko/Work";
 import KoContact from "./components/sections/ko/Contact";
 
 function EnLayout() {
+  useEffect(() => {
+    document.documentElement.lang = "en";
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ScrollProgressBar />
       <LanguageToggle />
-      <Hero />
-      <EnAbout />
-      <EnExperience />
-      <EnWork />
-      <Skills />
-      <EnContact />
-      <Footer />
+      <main>
+        <Hero />
+        <EnAbout />
+        <EnExperience />
+        <EnWork />
+        <Skills />
+        <EnContact />
+        <Footer />
+      </main>
     </div>
   );
 }
 
 function KoLayout() {
+  useEffect(() => {
+    document.documentElement.lang = "ko";
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ScrollProgressBar />
       <LanguageToggle />
-      <Hero />
-      <KoAbout />
-      <KoExperience />
-      <KoWork />
-      <Skills />
-      <KoContact />
-      <Footer />
+      <main>
+        <Hero />
+        <KoAbout />
+        <KoExperience />
+        <KoWork />
+        <Skills />
+        <KoContact />
+        <Footer />
+      </main>
     </div>
   );
 }
