@@ -87,7 +87,7 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
-      <div className="absolute bottom-10 right-6 md:right-38 z-10">
+      <div className="absolute bottom-20 right-6 md:right-20  lg:right-28 z-10">
         <ScrollToTopButton />
       </div>
     </section>
