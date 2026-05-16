@@ -115,7 +115,6 @@ export default function Work() {
     setDragPct(0);
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") setIdx((i) => Math.max(0, i - 1));
@@ -125,17 +124,14 @@ export default function Work() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // Mouse drag — global move/up so dragging outside the element still works
   useEffect(() => {
     if (!isDragging) return;
-
     const handleMouseMove = (e: MouseEvent) => {
       if (dragStartX.current == null || !wrapRef.current) return;
       const dx = e.clientX - dragStartX.current;
       const wrapW = wrapRef.current.getBoundingClientRect().width || 1;
       setDragPct((dx / wrapW) * 100);
     };
-
     const handleMouseUp = (e: MouseEvent) => {
       if (dragStartX.current == null) return;
       const dx = e.clientX - dragStartX.current;
@@ -146,7 +142,6 @@ export default function Work() {
         setIdx((i) => Math.max(0, Math.min(TOTAL - 1, i + (dx < 0 ? 1 : -1))));
       }
     };
-
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
     return () => {
@@ -164,8 +159,40 @@ export default function Work() {
     : "transform 700ms cubic-bezier(.6,.0,.2,1)";
 
   return (
-    <section id="work" aria-label="Work" className="py-32 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="work"
+      aria-label="Work"
+      className="flex flex-col h-[100dvh] md:block md:h-auto md:py-32 md:px-12"
+    >
+      {/* Mobile header */}
+      <header className="flex-none px-5 pt-4 pb-2.5 md:hidden">
+        <h2 className="font-serif italic font-normal text-[1.7rem] leading-[1.05] tracking-[-0.04em] mb-1.5">
+          Work
+        </h2>
+        <p className="text-[0.72rem] leading-[1.45] text-muted-foreground">
+          Selected projects from a high-traffic online travel platform{" "}
+          <a
+            href="https://tourvis.com/activity"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
+          >
+            Tourvis<ExternalLink size={9} className="mb-0.5 opacity-70" />
+          </a>{" "}
+          <a
+            href="https://activity.priviatravel.com/activity/main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
+          >
+            Privia<ExternalLink size={9} className="mb-0.5 opacity-70" />
+          </a>
+          .
+        </p>
+      </header>
+
+      {/* Desktop header */}
+      <div className="hidden md:block max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -175,7 +202,6 @@ export default function Work() {
         >
           Work
         </motion.h2>
-
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -206,63 +232,65 @@ export default function Work() {
           </a>
           .
         </motion.p>
+      </div>
 
-        <div aria-live="polite" className="sr-only">
-          {[...projects].sort((a, b) => a.no - b.no)[idx]?.name}
-        </div>
+      <div aria-live="polite" className="sr-only">
+        {[...projects].sort((a, b) => a.no - b.no)[idx]?.name}
+      </div>
 
-        {/* Slider */}
-        <div ref={sliderRef} className="relative">
-          {/* Track wrapper — grab cursor, touch + mouse drag */}
+      {/* Slider */}
+      <div
+        ref={sliderRef}
+        className="flex-1 flex flex-col min-h-0 relative md:flex-none md:block md:max-w-7xl md:mx-auto"
+      >
+        {/* Track wrapper */}
+        <div
+          ref={wrapRef}
+          className="flex-1 overflow-hidden min-h-0 touch-pan-y md:flex-none"
+          style={{ cursor: isDragging ? "grabbing" : "grab" }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            dragStartX.current = e.clientX;
+            setIsDragging(true);
+          }}
+          onTouchStart={(e) => {
+            dragStartX.current = e.touches[0].clientX;
+          }}
+          onTouchMove={(e) => {
+            if (dragStartX.current == null || !wrapRef.current) return;
+            const dx = e.touches[0].clientX - dragStartX.current;
+            const wrapW = wrapRef.current.getBoundingClientRect().width || 1;
+            setDragPct((dx / wrapW) * 100);
+          }}
+          onTouchEnd={(e) => {
+            if (dragStartX.current == null) return;
+            const dx = e.changedTouches[0].clientX - dragStartX.current;
+            dragStartX.current = null;
+            setDragPct(0);
+            if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
+          }}
+          onTouchCancel={() => {
+            dragStartX.current = null;
+            setDragPct(0);
+          }}
+        >
           <div
-            ref={wrapRef}
-            className="overflow-hidden touch-pan-y"
-            style={{ cursor: isDragging ? "grabbing" : "grab" }}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              dragStartX.current = e.clientX;
-              setIsDragging(true);
-            }}
-            onTouchStart={(e) => {
-              dragStartX.current = e.touches[0].clientX;
-            }}
-            onTouchMove={(e) => {
-              if (dragStartX.current == null || !wrapRef.current) return;
-              const dx = e.touches[0].clientX - dragStartX.current;
-              const wrapW = wrapRef.current.getBoundingClientRect().width || 1;
-              setDragPct((dx / wrapW) * 100);
-            }}
-            onTouchEnd={(e) => {
-              if (dragStartX.current == null) return;
-              const dx = e.changedTouches[0].clientX - dragStartX.current;
-              dragStartX.current = null;
-              setDragPct(0);
-              if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
-            }}
-            onTouchCancel={() => {
-              dragStartX.current = null;
-              setDragPct(0);
-            }}
+            className="flex h-full md:h-auto will-change-transform"
+            style={{ transform: trackTransform, transition: trackTransition }}
           >
-            <div
-              className="flex will-change-transform"
-              style={{
-                transform: trackTransform,
-                transition: trackTransition,
-              }}
-            >
-              {[...projects].sort((a, b) => a.no - b.no).map((p, i) => (
-                <article
-                  key={i}
-                  className="flex-[0_0_100%] min-w-0 grid grid-cols-1 gap-8 items-start md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
-                >
-                  {/* Visual */}
+            {[...projects].sort((a, b) => a.no - b.no).map((p, i) => (
+              <article
+                key={i}
+                className="flex-[0_0_100%] min-w-0 h-full flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
+              >
+                {/* Stage wrapper — position:relative so mobile arrows don't clip */}
+                <div className="relative flex-none px-5 md:px-0">
                   <div
                     ref={i === 0 ? visualRef : undefined}
-                    className={`group relative border border-border rounded-lg overflow-hidden ${
+                    className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg ${
                       p.screenshot_category === "mo"
-                        ? "aspect-[1/0.8] py-[1.75rem] md:py-[2.25rem] flex items-center justify-center"
-                        : "aspect-video bg-[var(--bg-color)] flex items-center justify-center text-center"
+                        ? "aspect-[1/0.96] md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
+                        : "aspect-[16/10] md:aspect-video flex items-center justify-center text-center"
                     }`}
                     style={{
                       background:
@@ -277,39 +305,44 @@ export default function Work() {
                           : undefined,
                     }}
                   >
+                    {/* Corner labels */}
+                    <span className="absolute top-3 right-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10">
+                      {pad(p.no)} / {pad(TOTAL)}
+                    </span>
+                    {p.mobileLabel && (
+                      <span className="absolute bottom-3 left-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10 max-w-[60%]">
+                        {p.mobileLabel}
+                      </span>
+                    )}
+
                     {p.screenshot_category === "mo" ? (
-                      <>
-                        <div className="relative aspect-[9/19.5] h-[96%] flex-none bg-background border border-border rounded-[1.6rem] overflow-hidden shadow-[0_22px_44px_-22px_rgba(0,0,0,0.25)]">
-                          <div className="absolute top-[0.55rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.4rem] bg-black/15 rounded-full z-10" />
-                          <div className="absolute bottom-[0.55rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.25rem] bg-black/[0.12] rounded-full z-10" />
-                          {p.screenshot ? (
-                            <img
-                              src={p.screenshot}
-                              alt={p.name}
-                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                              draggable={false}
-                            />
-                          ) : (
-                            <div
-                              className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
-                              style={{
-                                background:
-                                  "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
-                              }}
-                            >
-                              <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
-                                Screen — Project {pad(i + 1)}
-                              </div>
-                              <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
-                                {p.visualTitle.join(" ")}
-                              </div>
-                              <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mt-4 opacity-75">
-                                [ drop screenshot ]
-                              </div>
+                      <div className="relative aspect-[9/19.5] h-[94%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]">
+                        <div className="absolute top-[0.45rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.32rem] bg-black/15 rounded-full z-10" />
+                        <div className="absolute bottom-[0.45rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.22rem] bg-black/[0.12] rounded-full z-10" />
+                        {p.screenshot ? (
+                          <img
+                            src={p.screenshot}
+                            alt={p.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            draggable={false}
+                          />
+                        ) : (
+                          <div
+                            className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
+                            style={{
+                              background:
+                                "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
+                            }}
+                          >
+                            <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
+                              Screen — Project {pad(i + 1)}
                             </div>
-                          )}
-                        </div>
-                      </>
+                            <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
+                              {p.visualTitle.join(" ")}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     ) : (
                       <>
                         {p.screenshot ? (
@@ -335,91 +368,148 @@ export default function Work() {
                     )}
                   </div>
 
-                  {/* Body */}
-                  <div className="flex flex-col select-none">
-                    <div className="flex items-center gap-3 flex-wrap text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">
-                      <span className="text-foreground">{p.category}</span>
-                      <span className="text-border">·</span>
+                  {/* Mobile arrows — outside overflow:hidden stage div */}
+                  <button
+                    onClick={() => goTo(idx - 1)}
+                    disabled={idx === 0}
+                    aria-label="Previous project"
+                    className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={() => goTo(idx + 1)}
+                    disabled={idx === TOTAL - 1}
+                    aria-label="Next project"
+                    className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
+                  >
+                    →
+                  </button>
+                </div>
+
+                {/* Mobile body */}
+                <div className="flex-none flex flex-col px-5 md:hidden select-none">
+                  <div className="text-[0.62rem] tracking-[0.18em] uppercase text-foreground mb-2.5">
+                    {p.category}
+                  </div>
+                  <h3 className="font-serif font-normal text-[1.25rem] leading-[1.1] tracking-[-0.03em] mb-2.5">
+                    {p.titleLines}
+                  </h3>
+                  <p className="text-[0.76rem] leading-[1.5] text-foreground/[0.78] mb-3 line-clamp-3">
+                    {p.about}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.skills.map((skill, si) => (
+                      <span
+                        key={si}
+                        className="text-[0.6rem] tracking-[0.04em] text-foreground px-2.5 py-1.5 border border-border rounded-full bg-background"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop body */}
+                <div className="hidden md:flex flex-col select-none">
+                  <div className="flex items-center gap-3 flex-wrap text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">
+                    <span className="text-foreground">{p.category}</span>
+                    <span className="text-border">·</span>
+                  </div>
+                  <h3 className="font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6">
+                    {p.titleLines}
+                  </h3>
+                  <div className="border-t border-border pt-5 mb-5">
+                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                      About
                     </div>
-
-                    {/* Title — regular serif, not italic (per design) */}
-                    <h3 className="font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6">
-                      {p.titleLines}
-                    </h3>
-
-                    <div className="border-t border-border pt-5 mb-5">
-                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                        About
-                      </div>
-                      <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">
-                        {p.about}
-                      </p>
+                    <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">
+                      {p.about}
+                    </p>
+                  </div>
+                  <div className="border-t border-border pt-5">
+                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                      Skills
                     </div>
-
-                    <div className="border-t border-border pt-5">
-                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                        Skills
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {p.skills.map((skill, si) => (
-                          <span
-                            key={si}
-                            className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-2">
+                      {p.skills.map((skill, si) => (
+                        <span
+                          key={si}
+                          className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Edge arrows — horizontal position original, vertical center follows the visual */}
-          <button
-            onClick={() => goTo(idx - 1)}
-            disabled={idx === 0}
-            aria-label="Previous project"
-            className="absolute left-2 md:left-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none bg-opacity-50"
-            style={{ top: arrowTop ?? "50%" }}
-          >
-            ←
-          </button>
-          <button
-            onClick={() => goTo(idx + 1)}
-            disabled={idx === TOTAL - 1}
-            aria-label="Next project"
-            className="absolute right-2 md:right-4 z-10 -translate-y-1/2 w-10 h-40 flex items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
-            style={{ top: arrowTop ?? "50%" }}
-          >
-            →
-          </button>
-
-          {/* Controls — centered: counter + dots only */}
-          <div className="flex items-center justify-center pt-6 mt-6 gap-5 flex-wrap">
-            <div className="flex items-center gap-4 text-xs uppercase tracking-[0.1em] text-muted-foreground">
-              <div className="flex items-center gap-3">
-                {projects.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    aria-label={`Go to project ${i + 1}`}
-                    className="p-0 border-0 cursor-pointer"
-                    style={{
-                      width: 32,
-                      height: i === idx ? 2 : 1,
-                      background:
-                        i === idx ? "var(--foreground)" : "var(--border)",
-                      transition: "background 0.25s ease, height 0.25s ease",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
+
+        {/* Desktop arrows */}
+        <button
+          onClick={() => goTo(idx - 1)}
+          disabled={idx === 0}
+          aria-label="Previous project"
+          className="hidden md:flex absolute left-2 md:left-4 z-10 -translate-y-1/2 w-10 h-40 items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
+          style={{ top: arrowTop ?? "50%" }}
+        >
+          ←
+        </button>
+        <button
+          onClick={() => goTo(idx + 1)}
+          disabled={idx === TOTAL - 1}
+          aria-label="Next project"
+          className="hidden md:flex absolute right-2 md:right-4 z-10 -translate-y-1/2 w-10 h-40 items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
+          style={{ top: arrowTop ?? "50%" }}
+        >
+          →
+        </button>
+
+        {/* Desktop dots */}
+        <div className="hidden md:flex items-center justify-center pt-6 mt-6 gap-5 flex-wrap">
+          <div className="flex items-center gap-3">
+            {projects.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Go to project ${i + 1}`}
+                className="p-0 border-0 cursor-pointer"
+                style={{
+                  width: 32,
+                  height: i === idx ? 2 : 1,
+                  background:
+                    i === idx ? "var(--foreground)" : "var(--border)",
+                  transition: "background 0.25s ease, height 0.25s ease",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile dots */}
+      <div className="flex-none flex items-center justify-center gap-[0.45rem] py-3 md:hidden">
+        {projects.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Go to project ${i + 1}`}
+            className="p-0 border-0 cursor-pointer"
+            style={{
+              width: 24,
+              height: i === idx ? 2 : 1,
+              background:
+                i === idx
+                  ? "var(--foreground)"
+                  : "rgba(0,0,0,0.1)",
+              borderRadius: 1,
+              transition: "background 0.25s ease, height 0.25s ease",
+            }}
+          />
+        ))}
       </div>
     </section>
   );
