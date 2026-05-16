@@ -116,14 +116,19 @@ export default function Experience() {
                       <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
                         {item.year.split(" — ")[0]}
                       </span>
-                      <div className="relative h-px" style={{ backgroundColor: "rgb(212, 207, 201)" }}>
-                        <span className="absolute top-1/2 -translate-y-1/2 -left-0.5 w-[5px] h-[5px] rounded-full bg-foreground" />
+                      <div
+                        className="relative h-px"
+                        style={{ backgroundColor: "rgb(212, 207, 201)" }}
+                      >
+                        <span className="absolute top-1/2 -translate-y-1/2 -left-0.5 w-[5px] h-[5px] rounded-full bg-border-rail" />
                         <span
-                          className="absolute top-1/2 -translate-y-1/2 -right-0.5 w-[5px] h-[5px] rounded-full border border-border"
-                          style={{ backgroundColor: item.endDate ? "rgb(212, 207, 201)" : undefined }}
+                          className={`absolute top-1/2 -translate-y-1/2 -right-0.5 w-[5px] h-[5px] rounded-full border border-border ${item.endDate ? "bg-foreground" : "bg-border-rail"}`}
                         />
                         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--bg-color)] px-2 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
-                          {formatDuration(item.startDate, item.endDate ?? new Date())}
+                          {formatDuration(
+                            item.startDate,
+                            item.endDate ?? new Date(),
+                          )}
                         </span>
                       </div>
                       <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">

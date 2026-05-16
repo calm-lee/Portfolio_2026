@@ -41,6 +41,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --terracotta: oklch(0.52 0.11 28);
+  --border-rail: #d4cfc9;
 }
 
 .dark {
@@ -124,6 +125,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-terracotta: var(--terracotta);
+  --color-border-rail: var(--border-rail);
 }
 
 @layer base {
