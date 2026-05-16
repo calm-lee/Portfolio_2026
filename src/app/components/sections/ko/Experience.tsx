@@ -99,14 +99,25 @@ export default function Experience() {
                     <span className="tracking-[0.2em] mt-10 text-xs text-muted-foreground leading-none">
                       {item.year.split(" — ")[0]}
                     </span>
-                    <motion.span
-                      initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: false, margin: "-100px" }}
-                      transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="flex-1 block w-[1px] my-3 min-h-[40px] origin-top"
-                      style={{ backgroundColor: "#d4cfc9" }}
-                    />
+                    <div className="flex-1 relative flex justify-center my-3 ">
+                      <motion.span
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+                        className="block w-[1px] h-full origin-top bg-border-rail"
+                      />
+                      <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-border-rail" />
+                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--bg-color)] group-hover:bg-background/50 transition-colors py-1.5 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground whitespace-nowrap">
+                        {formatDuration(
+                          item.startDate,
+                          item.endDate ?? new Date(),
+                        )}
+                      </span>
+                      <span
+                        className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[5px] h-[5px] rounded-full border border-border ${item.endDate ? "bg-foreground" : "bg-border-rail"}`}
+                      />
+                    </div>
                     <span className="tracking-[0.2em] mb-2 text-xs text-muted-foreground leading-none">
                       {item.year.split(" — ")[1]}
                     </span>
@@ -117,13 +128,16 @@ export default function Experience() {
                       <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
                         {item.year.split(" — ")[0]}
                       </span>
-                      <div className="relative h-px" style={{ backgroundColor: "rgb(212, 207, 201)" }}>
+                      <div className="relative h-px bg-border-rail">
                         <span className="absolute top-1/2 -translate-y-1/2 -left-0.5 w-[5px] h-[5px] rounded-full bg-border-rail" />
                         <span
                           className={`absolute top-1/2 -translate-y-1/2 -right-0.5 w-[5px] h-[5px] rounded-full border border-border ${item.endDate ? "bg-foreground" : "bg-border-rail"}`}
                         />
                         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--bg-color)] px-2 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
-                          {formatDuration(item.startDate, item.endDate ?? new Date())}
+                          {formatDuration(
+                            item.startDate,
+                            item.endDate ?? new Date(),
+                          )}
                         </span>
                       </div>
                       <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
