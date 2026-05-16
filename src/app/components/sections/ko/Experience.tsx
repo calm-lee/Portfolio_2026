@@ -2,6 +2,17 @@ import React from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 
+function formatDuration(start: Date, end: Date): string {
+  const months =
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    (end.getMonth() - start.getMonth());
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  if (y && m) return `${y}y ${m}mo`;
+  if (y) return `${y}y`;
+  return `${m}mo`;
+}
+
 const tourvisLink = (
   <a
     href="https://tourvis.com/activity"
@@ -31,6 +42,8 @@ const priviaLink = (
 const experience = [
   {
     year: "2021.12 — 2025.2",
+    startDate: new Date(2021, 11),
+    endDate: new Date(2025, 1) as Date | null,
     role: "Frontend Engineer",
     company: "TIDESQUARE · 온라인 여행 플랫폼 · 서울",
     bullets: [
@@ -80,9 +93,9 @@ export default function Experience() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <div className="group py-8 border-t border-border hover:bg-background/50 transition-all duration-300 px-4 -mx-4">
+              <div className="group pt-0 pb-8 md:py-8 md:border-t md:border-border hover:bg-background/50 transition-all duration-300 px-4 -mx-4">
                 <div className="grid md:grid-cols-[200px_1fr] gap-8">
-                  <div className="flex flex-col items-center h-full gap-4">
+                  <div className="hidden md:flex flex-col items-center h-full gap-4">
                     <span className="tracking-[0.2em] mt-10 text-xs text-muted-foreground leading-none">
                       {item.year.split(" — ")[0]}
                     </span>
@@ -99,6 +112,25 @@ export default function Experience() {
                     </span>
                   </div>
                   <div>
+                    {/* Mobile top-band timeline */}
+                    <div className="md:hidden grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t border-border pt-2.5 pb-[18px] mb-3.5">
+                      <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
+                        {item.year.split(" — ")[0]}
+                      </span>
+                      <div className="relative h-px" style={{ backgroundColor: "rgb(212, 207, 201)" }}>
+                        <span className="absolute top-1/2 -translate-y-1/2 -left-0.5 w-[5px] h-[5px] rounded-full bg-foreground" />
+                        <span
+                          className="absolute top-1/2 -translate-y-1/2 -right-0.5 w-[5px] h-[5px] rounded-full border border-border"
+                          style={{ backgroundColor: item.endDate ? "rgb(212, 207, 201)" : undefined }}
+                        />
+                        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--bg-color)] px-2 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
+                          {formatDuration(item.startDate, item.endDate ?? new Date())}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
+                        {item.endDate ? item.year.split(" — ")[1] : "Present"}
+                      </span>
+                    </div>
                     <h3 className="text-2xl mb-3">{item.role}</h3>
                     <div className="text-sm mb-3 text-foreground/60">
                       {item.company}
