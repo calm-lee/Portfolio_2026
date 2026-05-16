@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import ScrollToTopButton from "@/app/components/common/ScrollToTopButton";
 
 export default function Contact() {
   return (
@@ -89,9 +88,6 @@ export default function Contact() {
             </a>
           </div>
         </motion.div>
-      </div>
-      <div className="absolute bottom-10 right-6 md:right-20 lg:right-28 z-10">
-        <ScrollToTopButton />
       </div>
     </section>
   );
