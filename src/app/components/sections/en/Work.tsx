@@ -48,7 +48,7 @@ const projects: Project[] = [
     mobileLabel: "Mobile · iOS / Android",
   },
   {
-    no: 3,
+    no: 5,
     category: "State Management & Performance",
     titleLines: "Adopting TanStack Query.",
     about:
@@ -72,7 +72,7 @@ const projects: Project[] = [
     screenshot_category: "desktop",
   },
   {
-    no: 5,
+    no: 3,
     category: "Migration & Optimization",
     titleLines: "Vue.js → Next.js migration.",
     about:
@@ -177,7 +177,8 @@ export default function Work() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
           >
-            Tourvis<ExternalLink size={9} className="mb-0.5 opacity-70" />
+            Tourvis
+            <ExternalLink size={9} className="mb-0.5 opacity-70" />
           </a>{" "}
           <a
             href="https://activity.priviatravel.com/activity/main"
@@ -185,7 +186,8 @@ export default function Work() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
           >
-            Privia<ExternalLink size={9} className="mb-0.5 opacity-70" />
+            Privia
+            <ExternalLink size={9} className="mb-0.5 opacity-70" />
           </a>
           .
         </p>
@@ -278,173 +280,175 @@ export default function Work() {
             className="flex h-full md:h-auto will-change-transform"
             style={{ transform: trackTransform, transition: trackTransition }}
           >
-            {[...projects].sort((a, b) => a.no - b.no).map((p, i) => (
-              <article
-                key={i}
-                className="flex-[0_0_100%] min-w-0 h-full flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
-              >
-                {/* Stage wrapper — position:relative so mobile arrows don't clip */}
-                <div className="relative flex-none px-5 md:px-0">
-                  <div
-                    ref={i === 0 ? visualRef : undefined}
-                    className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg ${
-                      p.screenshot_category === "mo"
-                        ? "aspect-[1/0.96] md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
-                        : "aspect-[16/10] md:aspect-video flex items-center justify-center text-center"
-                    }`}
-                    style={{
-                      background:
+            {[...projects]
+              .sort((a, b) => a.no - b.no)
+              .map((p, i) => (
+                <article
+                  key={i}
+                  className="flex-[0_0_100%] min-w-0 h-full flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
+                >
+                  {/* Stage wrapper — position:relative so mobile arrows don't clip */}
+                  <div className="relative flex-none px-5 md:px-0">
+                    <div
+                      ref={i === 0 ? visualRef : undefined}
+                      className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg ${
                         p.screenshot_category === "mo"
-                          ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px), var(--muted, #ececf0)"
-                          : !p.screenshot
-                            ? undefined
-                            : "var(--bg-color)",
-                      backgroundImage:
-                        p.screenshot_category !== "mo" && !p.screenshot
-                          ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px)"
-                          : undefined,
-                    }}
-                  >
-                    {/* Corner labels */}
-                    <span className="absolute top-3 right-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10">
-                      {pad(p.no)} / {pad(TOTAL)}
-                    </span>
-                    {p.mobileLabel && (
-                      <span className="absolute bottom-3 left-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10 max-w-[60%]">
-                        {p.mobileLabel}
+                          ? "aspect-[1/0.96] md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
+                          : "aspect-[16/10] md:aspect-video flex items-center justify-center text-center"
+                      }`}
+                      style={{
+                        background:
+                          p.screenshot_category === "mo"
+                            ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px), var(--muted, #ececf0)"
+                            : !p.screenshot
+                              ? undefined
+                              : "var(--bg-color)",
+                        backgroundImage:
+                          p.screenshot_category !== "mo" && !p.screenshot
+                            ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px)"
+                            : undefined,
+                      }}
+                    >
+                      {/* Corner labels */}
+                      <span className="absolute top-3 right-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10">
+                        {pad(p.no)} / {pad(TOTAL)}
                       </span>
-                    )}
+                      {p.mobileLabel && (
+                        <span className="absolute bottom-3 left-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10 max-w-[60%]">
+                          {p.mobileLabel}
+                        </span>
+                      )}
 
-                    {p.screenshot_category === "mo" ? (
-                      <div className="relative aspect-[9/19.5] h-[94%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]">
-                        <div className="absolute top-[0.45rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.32rem] bg-black/15 rounded-full z-10" />
-                        <div className="absolute bottom-[0.45rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.22rem] bg-black/[0.12] rounded-full z-10" />
-                        {p.screenshot ? (
-                          <img
-                            src={p.screenshot}
-                            alt={p.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            draggable={false}
-                          />
-                        ) : (
-                          <div
-                            className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
-                            style={{
-                              background:
-                                "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
-                            }}
-                          >
-                            <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
-                              Screen — Project {pad(i + 1)}
+                      {p.screenshot_category === "mo" ? (
+                        <div className="relative aspect-[9/19.5] h-[94%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]">
+                          <div className="absolute top-[0.45rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.32rem] bg-black/15 rounded-full z-10" />
+                          <div className="absolute bottom-[0.45rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.22rem] bg-black/[0.12] rounded-full z-10" />
+                          {p.screenshot ? (
+                            <img
+                              src={p.screenshot}
+                              alt={p.name}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                              draggable={false}
+                            />
+                          ) : (
+                            <div
+                              className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
+                              style={{
+                                background:
+                                  "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
+                              }}
+                            >
+                              <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
+                                Screen — Project {pad(i + 1)}
+                              </div>
+                              <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
+                                {p.visualTitle.join(" ")}
+                              </div>
                             </div>
-                            <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
-                              {p.visualTitle.join(" ")}
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          {p.screenshot ? (
+                            <img
+                              src={p.screenshot}
+                              alt={p.name}
+                              className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                              draggable={false}
+                            />
+                          ) : (
+                            <div className="relative select-none">
+                              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                                Screen — Project {pad(i + 1)}
+                              </div>
+                              <div className="font-serif text-[clamp(1.25rem,2.2vw,1.875rem)] text-foreground/80 leading-[1.18] tracking-[-0.03em] max-w-[32rem] mx-auto">
+                                {p.visualTitle.map((line, li) => (
+                                  <div key={li}>{line}</div>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <>
-                        {p.screenshot ? (
-                          <img
-                            src={p.screenshot}
-                            alt={p.name}
-                            className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            draggable={false}
-                          />
-                        ) : (
-                          <div className="relative select-none">
-                            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                              Screen — Project {pad(i + 1)}
-                            </div>
-                            <div className="font-serif text-[clamp(1.25rem,2.2vw,1.875rem)] text-foreground/80 leading-[1.18] tracking-[-0.03em] max-w-[32rem] mx-auto">
-                              {p.visualTitle.map((line, li) => (
-                                <div key={li}>{line}</div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-
-                  {/* Mobile arrows — outside overflow:hidden stage div */}
-                  <button
-                    onClick={() => goTo(idx - 1)}
-                    disabled={idx === 0}
-                    aria-label="Previous project"
-                    className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
-                  >
-                    ←
-                  </button>
-                  <button
-                    onClick={() => goTo(idx + 1)}
-                    disabled={idx === TOTAL - 1}
-                    aria-label="Next project"
-                    className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
-                  >
-                    →
-                  </button>
-                </div>
-
-                {/* Mobile body */}
-                <div className="flex-none flex flex-col px-5 md:hidden select-none">
-                  <div className="text-[0.62rem] tracking-[0.18em] uppercase text-foreground mb-2.5">
-                    {p.category}
-                  </div>
-                  <h3 className="font-serif font-normal text-[1.25rem] leading-[1.1] tracking-[-0.03em] mb-2.5">
-                    {p.titleLines}
-                  </h3>
-                  <p className="text-[0.76rem] leading-[1.5] text-foreground/[0.78] mb-3 line-clamp-3">
-                    {p.about}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.skills.map((skill, si) => (
-                      <span
-                        key={si}
-                        className="text-[0.6rem] tracking-[0.04em] text-foreground px-2.5 py-1.5 border border-border rounded-full bg-background"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Desktop body */}
-                <div className="hidden md:flex flex-col select-none">
-                  <div className="flex items-center gap-3 flex-wrap text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">
-                    <span className="text-foreground">{p.category}</span>
-                    <span className="text-border">·</span>
-                  </div>
-                  <h3 className="font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6">
-                    {p.titleLines}
-                  </h3>
-                  <div className="border-t border-border pt-5 mb-5">
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                      About
+                          )}
+                        </>
+                      )}
                     </div>
-                    <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">
+
+                    {/* Mobile arrows — outside overflow:hidden stage div */}
+                    <button
+                      onClick={() => goTo(idx - 1)}
+                      disabled={idx === 0}
+                      aria-label="Previous project"
+                      className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={() => goTo(idx + 1)}
+                      disabled={idx === TOTAL - 1}
+                      aria-label="Next project"
+                      className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
+                    >
+                      →
+                    </button>
+                  </div>
+
+                  {/* Mobile body */}
+                  <div className="flex-none flex flex-col px-5 md:hidden select-none">
+                    <div className="text-[0.62rem] tracking-[0.18em] uppercase text-foreground mb-2.5">
+                      {p.category}
+                    </div>
+                    <h3 className="font-serif font-normal text-[1.25rem] leading-[1.1] tracking-[-0.03em] mb-2.5">
+                      {p.titleLines}
+                    </h3>
+                    <p className="text-[0.76rem] leading-[1.5] text-foreground/[0.78] mb-3 line-clamp-3">
                       {p.about}
                     </p>
-                  </div>
-                  <div className="border-t border-border pt-5">
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                      Skills
-                    </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {p.skills.map((skill, si) => (
                         <span
                           key={si}
-                          className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background"
+                          className="text-[0.6rem] tracking-[0.04em] text-foreground px-2.5 py-1.5 border border-border rounded-full bg-background"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  {/* Desktop body */}
+                  <div className="hidden md:flex flex-col select-none">
+                    <div className="flex items-center gap-3 flex-wrap text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">
+                      <span className="text-foreground">{p.category}</span>
+                      <span className="text-border">·</span>
+                    </div>
+                    <h3 className="font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6">
+                      {p.titleLines}
+                    </h3>
+                    <div className="border-t border-border pt-5 mb-5">
+                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                        About
+                      </div>
+                      <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">
+                        {p.about}
+                      </p>
+                    </div>
+                    <div className="border-t border-border pt-5">
+                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                        Skills
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {p.skills.map((skill, si) => (
+                          <span
+                            key={si}
+                            className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
           </div>
         </div>
 
@@ -480,8 +484,7 @@ export default function Work() {
                 style={{
                   width: 32,
                   height: i === idx ? 2 : 1,
-                  background:
-                    i === idx ? "var(--foreground)" : "var(--border)",
+                  background: i === idx ? "var(--foreground)" : "var(--border)",
                   transition: "background 0.25s ease, height 0.25s ease",
                 }}
               />
@@ -501,10 +504,7 @@ export default function Work() {
             style={{
               width: 24,
               height: i === idx ? 2 : 1,
-              background:
-                i === idx
-                  ? "var(--foreground)"
-                  : "rgba(0,0,0,0.1)",
+              background: i === idx ? "var(--foreground)" : "rgba(0,0,0,0.1)",
               borderRadius: 1,
               transition: "background 0.25s ease, height 0.25s ease",
             }}
