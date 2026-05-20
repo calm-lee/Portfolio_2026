@@ -198,7 +198,7 @@ export default function Work() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-100px" }}
+          viewport={{ once: false }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-[clamp(2.5rem,5vw,4rem)] italic mb-4"
         >
@@ -207,7 +207,7 @@ export default function Work() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-100px" }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-muted-foreground text-base leading-relaxed mb-4 max-w-[60ch]"
         >

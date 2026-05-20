@@ -30,7 +30,7 @@ export default function Skills() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-100px" }}
+          viewport={{ once: false }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-[clamp(3rem,5vw,5rem)] mb-16 italic"
         >
@@ -43,7 +43,7 @@ export default function Skills() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.08,
