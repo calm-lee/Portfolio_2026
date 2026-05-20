@@ -45,7 +45,24 @@ export default function About() {
                   transition={{ duration: 0.3 }}
                   className="block"
                 >
-                  <RadiantText as="span">Improving UI/UX</RadiantText>
+                  <RadiantText as="span">Improving</RadiantText>
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      delay: 1,
+                      duration: 1.2,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.3 }}
+                  className="block"
+                >
+                  <RadiantText as="span">UI/UX</RadiantText>
                 </motion.span>
               </h2>
             </div>
