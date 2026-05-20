@@ -197,18 +197,18 @@ export default function Work() {
       <div className="hidden md:block max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] } }}
           viewport={{ once: false }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3 }}
           className="text-[clamp(2.5rem,5vw,4rem)] italic mb-4"
         >
           Work
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] } }}
           viewport={{ once: false }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3 }}
           className="text-muted-foreground text-base leading-relaxed mb-4 max-w-[60ch]"
         >
           Selected projects from a high-traffic online travel platform{" "}

@@ -29,9 +29,9 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] } }}
           viewport={{ once: false }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3 }}
           className="text-[clamp(3rem,5vw,5rem)] mb-16 italic"
         >
           Skills
@@ -42,13 +42,9 @@ export default function Skills() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] } }}
               viewport={{ once: false }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.08,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+              transition={{ duration: 0.3 }}
               className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-8 border-t border-border last:border-b"
             >
               <div className="text-muted-foreground text-sm uppercase tracking-widest pt-1">
