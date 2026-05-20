@@ -93,7 +93,7 @@ export default function Experience() {
                         initial={{ scaleY: 0 }}
                         whileInView={{ scaleY: 1 }}
                         viewport={{ once: false }}
-                        transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 7, ease: [0.16, 1, 0.3, 1] }}
                         className="block w-[1px] h-full origin-top bg-border-rail"
                       />
                       <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-border-rail" />
