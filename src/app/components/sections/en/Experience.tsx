@@ -1,16 +1,6 @@
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
-
-function formatDuration(start: Date, end: Date): string {
-  const months =
-    (end.getFullYear() - start.getFullYear()) * 12 +
-    (end.getMonth() - start.getMonth());
-  const y = Math.floor(months / 12);
-  const m = months % 12;
-  if (y && m) return `${y}y ${m}mo`;
-  if (y) return `${y}y`;
-  return `${m}mo`;
-}
+import { formatDuration } from "../../common/formatDuration";
 
 const tourvisLink = (
   <a
@@ -72,7 +62,7 @@ export default function Experience() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-100px" }}
+          viewport={{ once: false }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-[clamp(3rem,5vw,5rem)] mb-8 italic"
         >
@@ -85,7 +75,7 @@ export default function Experience() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.1,
@@ -122,7 +112,6 @@ export default function Experience() {
                     </span>
                   </div>
                   <div>
-                    {/* Mobile top-band timeline */}
                     <div className="md:hidden grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t border-border pt-2.5 pb-[18px] mb-3.5">
                       <span className="font-mono text-[0.72rem] tracking-[0.1em] text-foreground/70">
                         {item.year.split(" — ")[0]}
