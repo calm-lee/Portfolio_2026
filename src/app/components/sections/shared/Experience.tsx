@@ -55,7 +55,11 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] } }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
+          }}
           viewport={{ once: false }}
           transition={{ duration: 0.3 }}
           className="text-[clamp(3rem,5vw,5rem)] mb-8 italic"
@@ -66,7 +70,11 @@ export default function Experience() {
         <div className="space-y-1">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0, ease: [0.16, 1, 0.3, 1] } }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, delay: 0, ease: [0.16, 1, 0.3, 1] },
+            }}
             viewport={{ once: false }}
             transition={{ duration: 0.3 }}
           >
@@ -79,7 +87,13 @@ export default function Experience() {
                   <div className="flex-1 relative flex justify-center my-3 h-full">
                     <motion.span
                       initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1, transition: { duration: 7, delay: 0.2, ease: [0.16, 1, 0.3, 1] } }}
+                      whileInView={{
+                        scaleY: 1,
+                        transition: {
+                          duration: 3,
+                          delay: 0.2,
+                        },
+                      }}
                       viewport={{ once: false }}
                       transition={{ duration: 0.3 }}
                       className="block w-[1px] h-full origin-top bg-border-rail"
