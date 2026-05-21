@@ -1,6 +1,12 @@
 import { motion } from "motion/react";
+import { useLanguage } from "@/app/context/LanguageContext";
+import { contact as enContact } from "@/content/en";
+import { contact as koContact } from "@/content/ko";
 
 export default function Contact() {
+  const lang = useLanguage();
+  const content = lang === "ko" ? koContact : enContact;
+
   return (
     <section id="contact" aria-label="Contact" className="relative py-32 px-6 md:px-12 text-black">
       <div className="max-w-6xl mx-auto">
@@ -11,10 +17,10 @@ export default function Contact() {
           transition={{ duration: 0.3 }}
         >
           <h2 className="text-[clamp(3rem,5vw,5rem)] mb-8 tracking-normal italic">
-            Get in touch
+            {content.heading}
           </h2>
           <p className="text-lg md:text-xl mb-8 md:mb-12 max-w-[60ch] opacity-80 font-light">
-            I'm always happy to connect and explore new opportunities —{" "}
+            {content.bodyPrefix}{" "}
             <motion.span
               animate={{ y: [0, -8, 0] }}
               transition={{
@@ -24,7 +30,7 @@ export default function Contact() {
               }}
               className="inline-block"
             >
-              feel free to reach out!
+              {content.bodyHighlight}
             </motion.span>
           </p>
 

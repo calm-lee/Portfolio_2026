@@ -1,68 +1,40 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
+import { work as enWork } from "@/content/en";
+import { work as koWork } from "@/content/ko";
 
-type Project = {
+type BaseProject = {
   no: number;
   category: string;
-  titleLines: ReactNode;
-  about: string;
   skills: string[];
-  visualTitle: string[];
   name: string;
-  screenshot?: string;
-  screenshot_category?: string;
-  mobileLabel?: string;
+  screenshot: string;
+  screenshot_category: "mo" | "desktop";
 };
 
-const projects: Project[] = [
+const BASE_PROJECTS: BaseProject[] = [
   {
     no: 1,
     category: "Cross-Browser & Device UX",
-    titleLines: (
-      <>
-        모바일 예약상세 페이지 개선: <br /> iOS/WebView 핸들링
-      </>
-    ),
-    about:
-      "iOS Safari 및 인앱 웹뷰 환경에서 PDF 다운로드가 외부 뷰어를 강제로 실행시켜 흐름이 끊기는 문제가 있었습니다. Blolb API와 미들웨어를 이용하여 pdf 링크를 우회해서 파일 다운로드가 매끄럽게 연결되도록 UX를 개선시켰습니다.",
     skills: ["Next.js Middleware", "Blob API", "AWS S3", "iOS Safari"],
-    visualTitle: ["PDF download", "inside iOS Safari & in-app WebView."],
     name: "iOS Safari · In-App WebView PDF handling",
     screenshot: `${import.meta.env.BASE_URL}screenshot_pdf.gif`,
     screenshot_category: "mo",
-    mobileLabel: "Mobile · iOS / WebView",
   },
   {
     no: 2,
     category: "Cross-Browser & Device UX",
-    titleLines: (
-      <>
-        모바일 예약상세 페이지 개선: <br /> Google Maps·네이티브 캘린더 연동
-      </>
-    ),
-    about:
-      "예약 상세 페이지에서 여행 장소 및 날짜를, 구글맵과 캘린더 앱으로 딥링크시켜 사용자가 등록할 수 있도록 했습니다. 기존에 예약 후 정보를 복사·붙여넣기하던 번거로운 과정을 대체했습니다.",
-    skills: [
-      "Deep linking",
-      "iOS / Android",
-      "Calendar API",
-      "Google Maps API",
-    ],
-    visualTitle: ["Reservation detail", "with map & calendar deep links."],
+    skills: ["Deep linking", "iOS / Android", "Calendar API", "Google Maps API"],
     name: "Google Maps · Native Calendar integration",
     screenshot: `${import.meta.env.BASE_URL}screenshot_deeplink.gif`,
     screenshot_category: "mo",
-    mobileLabel: "Mobile · iOS / Android",
   },
   {
     no: 5,
     category: "State Management & Performance",
-    titleLines: <>최근 검색어: TanStack Query 도입</>,
-    about:
-      "최근 검색어 등록, 삭제, 모두 삭제 기능을 TanStack Query를 도입하여 중복 요청을 줄이고 불필요한 지연 현상을 줄였습니다.",
     skills: ["TanStack Query", "Cache strategy", "REST API"],
-    visualTitle: ["Search response", "with cached, deduped queries."],
     name: "Adopting TanStack Query",
     screenshot: `${import.meta.env.BASE_URL}screenshot_search.gif`,
     screenshot_category: "desktop",
@@ -70,11 +42,7 @@ const projects: Project[] = [
   {
     no: 4,
     category: "State Management & Performance",
-    titleLines: <>Redux 기반 재입고 알림</>,
-    about:
-      "캘린더에서 원하는 날자를 선택하면 재고가 돌아오는 즉시 알림을 받을 수 있는 기능입니다. 다중 모달로 되어있는 기능을, Redux 기반 상태 관리를 통해 효율적으로 클라이언트 데이터를 다루도록 처리했습니다.",
     skills: ["Redux", "Responsive Design", "Notifications"],
-    visualTitle: ["Restock notification", "subscription & toast surface."],
     name: "Redux-driven restock alerts",
     screenshot: `${import.meta.env.BASE_URL}screenshot_restock.gif`,
     screenshot_category: "desktop",
@@ -82,21 +50,48 @@ const projects: Project[] = [
   {
     no: 3,
     category: "Migration & Optimization",
-    titleLines: <>Vue.js → Next.js 마이그레이션</>,
-    about:
-      "서비스 중단 없이 레거시 Vue.js 프론트엔드를 Next.js(App Router)로 재구축했습니다. 아웃소싱으로 인해 스파게티 소스로 이뤄졌던 코드베이스를 React 기반으로 리팩토링하고, SEO 및 성능을 개선해 LightHouse 지표를 큰 폭으로 향상시켰습니다.",
     skills: ["Next.js App Router", "Vue.js", "SSR", "Lighthouse"],
-    visualTitle: ["Re-platformed surface", "on Next.js App Router."],
     name: "Vue.js → Next.js migration",
     screenshot: `${import.meta.env.BASE_URL}screenshot_lighthouse.png`,
     screenshot_category: "desktop",
   },
 ];
 
-const TOTAL = projects.length;
+const TOTAL = BASE_PROJECTS.length;
 const pad = (n: number) => String(n).padStart(2, "0");
 
+const linkClass =
+  "inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm";
+const mobileLinkClass = "inline-flex items-center gap-px px-1 rounded-sm text-foreground";
+
 export default function Work() {
+  const lang = useLanguage();
+  const workContent = lang === "ko" ? koWork : enWork;
+
+  const projects = BASE_PROJECTS.map((base) => {
+    const lc = workContent.projects.find((p) => p.no === base.no)!;
+    return { ...base, titleLines: lc.titleLines, about: lc.about };
+  });
+
+  const { intro } = workContent;
+
+  const h3Style = lang === "ko" ? { fontFamily: "'Jeju Myeongjo', serif" } : undefined;
+  const h3MobileClass =
+    lang === "ko"
+      ? "font-normal text-[1.25rem] leading-[1.3] tracking-[-0.02em] mb-2.5"
+      : "font-serif font-normal text-[1.25rem] leading-[1.1] tracking-[-0.03em] mb-2.5";
+  const h3DesktopClass =
+    lang === "ko"
+      ? "font-normal text-[clamp(2rem,3.6vw,2rem)] leading-[1.05] tracking-[-0.05em] mb-6"
+      : "font-serif font-normal text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.05em] mb-6";
+
+  const ariaLabels = {
+    prev: lang === "ko" ? "이전 프로젝트" : "Previous project",
+    next: lang === "ko" ? "다음 프로젝트" : "Next project",
+    goTo: (i: number) =>
+      lang === "ko" ? `${i + 1}번 프로젝트로 이동` : `Go to project ${i + 1}`,
+  };
+
   const [idx, setIdx] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragPct, setDragPct] = useState(0);
@@ -161,10 +156,7 @@ export default function Work() {
   const trackTransform = isDragging
     ? `translateX(calc(-${idx * 100}% + ${dragPct}%))`
     : `translateX(-${idx * 100}%)`;
-
-  const trackTransition = isDragging
-    ? "none"
-    : "transform 700ms cubic-bezier(.6,.0,.2,1)";
+  const trackTransition = isDragging ? "none" : "transform 700ms cubic-bezier(.6,.0,.2,1)";
 
   return (
     <section
@@ -178,25 +170,17 @@ export default function Work() {
           Work
         </h2>
         <p className="text-[0.72rem] leading-[1.45] text-muted-foreground">
-          여행 플랫폼{" "}
-          <a
-            href="https://tourvis.com/activity"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
-          >
-            투어비스<ExternalLink size={9} className="mb-0.5 opacity-70" />
-          </a>{" "}
-          ·{" "}
-          <a
-            href="https://activity.priviatravel.com/activity/main"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-px px-1 rounded-sm text-foreground"
-          >
-            프리비아<ExternalLink size={9} className="mb-0.5 opacity-70" />
+          {intro.pre}{" "}
+          <a href="https://tourvis.com/activity" target="_blank" rel="noopener noreferrer"
+            className={mobileLinkClass}>
+            {intro.tourvis}<ExternalLink size={9} className="mb-0.5 opacity-70" />
           </a>
-          에서 작업했던 주요 작업입니다.
+          {lang === "ko" ? <>{" "}·{" "}</> : " "}
+          <a href="https://activity.priviatravel.com/activity/main" target="_blank" rel="noopener noreferrer"
+            className={mobileLinkClass}>
+            {intro.privia}<ExternalLink size={9} className="mb-0.5 opacity-70" />
+          </a>
+          {intro.post}
         </p>
       </header>
 
@@ -218,29 +202,15 @@ export default function Work() {
           transition={{ duration: 0.3 }}
           className="text-muted-foreground text-base leading-relaxed mb-4 max-w-[60ch]"
         >
-          여행 플랫폼
-          <a
-            href="https://tourvis.com/activity"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
-              투어비스
-              <ExternalLink size={11} className="mb-1" />
-            </span>
+          {intro.pre}{" "}
+          <a href="https://tourvis.com/activity" target="_blank" rel="noopener noreferrer">
+            <span className={linkClass}>{intro.tourvis}<ExternalLink size={11} className="mb-1" /></span>
           </a>
-          ·
-          <a
-            href="https://activity.priviatravel.com/activity/main"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="inline-flex items-center gap-0.5 transition-colors duration-200 px-1 hover:bg-black hover:text-[#f5f1e8] rounded-sm">
-              프리비아
-              <ExternalLink size={11} className="mb-1" />
-            </span>
+          {lang === "ko" ? "·" : " "}
+          <a href="https://activity.priviatravel.com/activity/main" target="_blank" rel="noopener noreferrer">
+            <span className={linkClass}>{intro.privia}<ExternalLink size={11} className="mb-1" /></span>
           </a>
-          에서 작업했던 주요 작업입니다.
+          {intro.post}
         </motion.p>
       </div>
 
@@ -253,7 +223,6 @@ export default function Work() {
         ref={sliderRef}
         className="flex-1 flex flex-col min-h-0 relative md:flex-none md:block md:max-w-7xl md:mx-auto"
       >
-        {/* Track wrapper */}
         <div
           ref={wrapRef}
           className="flex-1 overflow-hidden min-h-0 touch-pan-y md:flex-none"
@@ -263,9 +232,7 @@ export default function Work() {
             dragStartX.current = e.clientX;
             setIsDragging(true);
           }}
-          onTouchStart={(e) => {
-            dragStartX.current = e.touches[0].clientX;
-          }}
+          onTouchStart={(e) => { dragStartX.current = e.touches[0].clientX; }}
           onTouchMove={(e) => {
             if (dragStartX.current == null || !wrapRef.current) return;
             const dx = e.touches[0].clientX - dragStartX.current;
@@ -279,10 +246,7 @@ export default function Work() {
             setDragPct(0);
             if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
           }}
-          onTouchCancel={() => {
-            dragStartX.current = null;
-            setDragPct(0);
-          }}
+          onTouchCancel={() => { dragStartX.current = null; setDragPct(0); }}
         >
           <div
             className="flex h-full md:h-auto will-change-transform"
@@ -293,7 +257,6 @@ export default function Work() {
                 key={i}
                 className="flex-[0_0_100%] min-w-0 h-full flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
               >
-                {/* Stage wrapper — position:relative so mobile arrows don't clip */}
                 <div className="relative flex-none px-5 md:px-0">
                   <div
                     ref={i === 0 ? visualRef : undefined}
@@ -306,93 +269,36 @@ export default function Work() {
                       background:
                         p.screenshot_category === "mo"
                           ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px), var(--muted, #ececf0)"
-                          : !p.screenshot
-                            ? undefined
-                            : "var(--bg-color)",
-                      backgroundImage:
-                        p.screenshot_category !== "mo" && !p.screenshot
-                          ? "repeating-linear-gradient(135deg, transparent 0 16px, rgba(0,0,0,0.03) 16px 17px)"
-                          : undefined,
+                          : "var(--bg-color)",
                     }}
                   >
-                    {/* Corner labels */}
                     <span className="absolute top-3 right-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10">
                       {pad(p.no)} / {pad(TOTAL)}
                     </span>
-                    {p.mobileLabel && (
-                      <span className="absolute bottom-3 left-3.5 text-[0.6rem] tracking-[0.18em] uppercase text-muted-foreground z-10 max-w-[60%]">
-                        {p.mobileLabel}
-                      </span>
-                    )}
-
                     {p.screenshot_category === "mo" ? (
                       <div className="relative aspect-[9/19.5] h-[94%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]">
                         <div className="absolute top-[0.45rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.32rem] bg-black/15 rounded-full z-10" />
                         <div className="absolute bottom-[0.45rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.22rem] bg-black/[0.12] rounded-full z-10" />
-                        {p.screenshot ? (
-                          <img
-                            src={p.screenshot}
-                            alt={p.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            draggable={false}
-                          />
-                        ) : (
-                          <div
-                            className="absolute inset-[1.75rem_1.1rem] flex flex-col items-center justify-center text-center rounded-lg p-4"
-                            style={{
-                              background:
-                                "repeating-linear-gradient(135deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px)",
-                            }}
-                          >
-                            <div className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground mb-[0.85rem]">
-                              Screen — Project {pad(i + 1)}
-                            </div>
-                            <div className="font-serif text-base leading-[1.22] tracking-[-0.02em] text-foreground/[0.78] max-w-[16ch] opacity-90">
-                              {p.visualTitle.join(" ")}
-                            </div>
-                          </div>
-                        )}
+                        <img src={p.screenshot} alt={p.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          draggable={false} />
                       </div>
                     ) : (
-                      <>
-                        {p.screenshot ? (
-                          <img
-                            src={p.screenshot}
-                            alt={p.name}
-                            className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            draggable={false}
-                          />
-                        ) : (
-                          <div className="relative select-none">
-                            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                              Screen — Project {pad(i + 1)}
-                            </div>
-                            <div className="font-serif text-[clamp(1.25rem,2.2vw,1.875rem)] text-foreground/80 leading-[1.18] tracking-[-0.03em] max-w-[32rem] mx-auto">
-                              {p.visualTitle.map((line, li) => (
-                                <div key={li}>{line}</div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </>
+                      <img src={p.screenshot} alt={p.name}
+                        className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        draggable={false} />
                     )}
                   </div>
 
                   {/* Mobile arrows */}
-                  <button
-                    onClick={() => goTo(idx - 1)}
-                    disabled={idx === 0}
-                    aria-label="이전 프로젝트"
-                    className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
-                  >
+                  <button onClick={() => goTo(idx - 1)} disabled={idx === 0}
+                    aria-label={ariaLabels.prev}
+                    className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20">
                     ←
                   </button>
-                  <button
-                    onClick={() => goTo(idx + 1)}
-                    disabled={idx === TOTAL - 1}
-                    aria-label="다음 프로젝트"
-                    className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20"
-                  >
+                  <button onClick={() => goTo(idx + 1)} disabled={idx === TOTAL - 1}
+                    aria-label={ariaLabels.next}
+                    className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-[6.875rem] flex items-center justify-center rounded-[0.625rem] border border-black/20 bg-white/80 backdrop-blur-sm text-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none z-20">
                     →
                   </button>
                 </div>
@@ -402,21 +308,17 @@ export default function Work() {
                   <div className="text-[0.62rem] tracking-[0.18em] uppercase text-foreground mb-2.5">
                     {p.category}
                   </div>
-                  <h3
-                    className="font-normal text-[1.25rem] leading-[1.3] tracking-[-0.02em] mb-2.5"
-                    style={{ fontFamily: "'Jeju Myeongjo', serif" }}
-                  >
-                    {p.titleLines}
+                  <h3 className={h3MobileClass} style={h3Style}>
+                    {p.titleLines.map((line, li) => (
+                      <span key={li}>{li > 0 && <br />}{line}</span>
+                    ))}
                   </h3>
                   <p className="text-[0.76rem] leading-[1.5] text-foreground/[0.78] mb-3 line-clamp-3">
                     {p.about}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {p.skills.map((skill, si) => (
-                      <span
-                        key={si}
-                        className="text-[0.6rem] tracking-[0.04em] text-foreground px-2.5 py-1.5 border border-border rounded-full bg-background"
-                      >
+                      <span key={si} className="text-[0.6rem] tracking-[0.04em] text-foreground px-2.5 py-1.5 border border-border rounded-full bg-background">
                         {skill}
                       </span>
                     ))}
@@ -429,30 +331,20 @@ export default function Work() {
                     <span className="text-foreground">{p.category}</span>
                     <span className="text-border">·</span>
                   </div>
-                  <h3
-                    className="font-normal text-[clamp(2rem,3.6vw,2rem)] leading-[1.05] tracking-[-0.05em] mb-6"
-                    style={{ fontFamily: "'Jeju Myeongjo', serif" }}
-                  >
-                    {p.titleLines}
+                  <h3 className={h3DesktopClass} style={h3Style}>
+                    {p.titleLines.map((line, li) => (
+                      <span key={li}>{li > 0 && <br />}{line}</span>
+                    ))}
                   </h3>
                   <div className="border-t border-border pt-5 mb-5">
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                      About
-                    </div>
-                    <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">
-                      {p.about}
-                    </p>
+                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">About</div>
+                    <p className="text-base leading-[1.7] text-foreground/75 max-w-[56ch]">{p.about}</p>
                   </div>
                   <div className="border-t border-border pt-5">
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                      Skills
-                    </div>
+                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">Skills</div>
                     <div className="flex flex-wrap gap-2">
                       {p.skills.map((skill, si) => (
-                        <span
-                          key={si}
-                          className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background"
-                        >
+                        <span key={si} className="text-xs tracking-[0.05em] text-foreground px-3 py-1.5 border border-border rounded-full bg-background">
                           {skill}
                         </span>
                       ))}
@@ -465,22 +357,16 @@ export default function Work() {
         </div>
 
         {/* Desktop arrows */}
-        <button
-          onClick={() => goTo(idx - 1)}
-          disabled={idx === 0}
-          aria-label="이전 프로젝트"
+        <button onClick={() => goTo(idx - 1)} disabled={idx === 0}
+          aria-label={ariaLabels.prev}
           className="hidden md:flex absolute left-2 md:left-4 z-10 -translate-y-1/2 w-10 h-40 items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
-          style={{ top: arrowTop ?? "50%" }}
-        >
+          style={{ top: arrowTop ?? "50%" }}>
           ←
         </button>
-        <button
-          onClick={() => goTo(idx + 1)}
-          disabled={idx === TOTAL - 1}
-          aria-label="다음 프로젝트"
+        <button onClick={() => goTo(idx + 1)} disabled={idx === TOTAL - 1}
+          aria-label={ariaLabels.next}
           className="hidden md:flex absolute right-2 md:right-4 z-10 -translate-y-1/2 w-10 h-40 items-center justify-center rounded-[var(--radius)] border border-black/20 text-foreground bg-white/80 hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 disabled:opacity-25 disabled:pointer-events-none"
-          style={{ top: arrowTop ?? "50%" }}
-        >
+          style={{ top: arrowTop ?? "50%" }}>
           →
         </button>
 
@@ -488,19 +374,11 @@ export default function Work() {
         <div className="hidden md:flex items-center justify-center pt-6 mt-6 gap-5 flex-wrap">
           <div className="flex items-center gap-3">
             {projects.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                aria-label={`${i + 1}번 프로젝트로 이동`}
+              <button key={i} onClick={() => goTo(i)} aria-label={ariaLabels.goTo(i)}
                 className="p-0 border-0 cursor-pointer"
-                style={{
-                  width: 32,
-                  height: i === idx ? 2 : 1,
-                  background:
-                    i === idx ? "var(--foreground)" : "var(--border)",
-                  transition: "background 0.25s ease, height 0.25s ease",
-                }}
-              />
+                style={{ width: 32, height: i === idx ? 2 : 1,
+                  background: i === idx ? "var(--foreground)" : "var(--border)",
+                  transition: "background 0.25s ease, height 0.25s ease" }} />
             ))}
           </div>
         </div>
@@ -509,20 +387,11 @@ export default function Work() {
       {/* Mobile dots */}
       <div className="flex-none flex items-center justify-center gap-[0.45rem] py-3 md:hidden">
         {projects.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`${i + 1}번 프로젝트로 이동`}
+          <button key={i} onClick={() => goTo(i)} aria-label={ariaLabels.goTo(i)}
             className="p-0 border-0 cursor-pointer"
-            style={{
-              width: 24,
-              height: i === idx ? 2 : 1,
-              background:
-                i === idx ? "var(--foreground)" : "rgba(0,0,0,0.1)",
-              borderRadius: 1,
-              transition: "background 0.25s ease, height 0.25s ease",
-            }}
-          />
+            style={{ width: 24, height: i === idx ? 2 : 1,
+              background: i === idx ? "var(--foreground)" : "rgba(0,0,0,0.1)",
+              borderRadius: 1, transition: "background 0.25s ease, height 0.25s ease" }} />
         ))}
       </div>
     </section>

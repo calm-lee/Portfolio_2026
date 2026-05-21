@@ -7,15 +7,10 @@ import Hero from "./components/sections/shared/Hero";
 import Skills from "./components/sections/shared/Skills";
 import Footer from "./components/sections/shared/Footer";
 
-import EnAbout from "./components/sections/en/About";
-import EnExperience from "./components/sections/en/Experience";
-import EnWork from "./components/sections/en/Work";
-import EnContact from "./components/sections/en/Contact";
-
-import KoAbout from "./components/sections/ko/About";
-import KoExperience from "./components/sections/ko/Experience";
-import KoWork from "./components/sections/ko/Work";
-import KoContact from "./components/sections/ko/Contact";
+import About from "./components/sections/shared/About";
+import Experience from "./components/sections/shared/Experience";
+import Work from "./components/sections/shared/Work";
+import Contact from "./components/sections/shared/Contact";
 
 function EnLayout() {
   useEffect(() => {
@@ -29,11 +24,11 @@ function EnLayout() {
       <ScrollToTopButton />
       <main>
         <Hero />
-        <EnAbout />
-        <EnExperience />
-        <EnWork />
+        <About />
+        <Experience />
+        <Work />
         <Skills />
-        <EnContact />
+        <Contact />
         <Footer />
       </main>
     </div>
@@ -52,11 +47,11 @@ function KoLayout() {
       <ScrollToTopButton />
       <main>
         <Hero />
-        <KoAbout />
-        <KoExperience />
-        <KoWork />
+        <About />
+        <Experience />
+        <Work />
         <Skills />
-        <KoContact />
+        <Contact />
         <Footer />
       </main>
     </div>
