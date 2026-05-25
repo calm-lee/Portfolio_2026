@@ -171,7 +171,7 @@ export default function Work() {
     <section
       id="work"
       aria-label="Work"
-      className="flex flex-col h-[100dvh] md:block md:h-auto md:py-32 md:px-12"
+      className="flex flex-col md:block py-4 md:h-auto md:py-32 md:px-12"
     >
       {/* Mobile header */}
       <header className="flex-none px-5 pt-4 pb-2.5 md:hidden">
@@ -262,11 +262,11 @@ export default function Work() {
       {/* Slider */}
       <div
         ref={sliderRef}
-        className="flex-1 flex flex-col min-h-0 relative md:flex-none md:block md:max-w-7xl md:mx-auto"
+        className="flex flex-col min-h-0 relative md:flex-none md:block md:max-w-7xl md:mx-auto"
       >
         <div
           ref={wrapRef}
-          className="flex-1 overflow-hidden min-h-0 touch-pan-y md:flex-none"
+          className="overflow-hidden min-h-0 touch-pan-y md:flex-none"
           style={{ cursor: isDragging ? "grabbing" : "grab" }}
           onMouseDown={(e) => {
             e.preventDefault();
@@ -295,7 +295,7 @@ export default function Work() {
           }}
         >
           <div
-            className="flex h-full md:h-auto will-change-transform"
+            className="flex md:h-auto will-change-transform"
             style={{ transform: trackTransform, transition: trackTransition }}
           >
             {[...projects]
@@ -303,14 +303,14 @@ export default function Work() {
               .map((p, i) => (
                 <article
                   key={i}
-                  className="flex-[0_0_100%] min-w-0 h-full flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
+                  className="flex-[0_0_100%] min-w-0 flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
                 >
                   <div className="relative flex-none px-5 md:px-0">
                     <div
                       ref={i === 0 ? visualRef : undefined}
                       className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg ${
                         p.screenshot_category === "mo"
-                          ? "aspect-[1/0.96] md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
+                          ? "aspect-[1/0.96] df md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
                           : "aspect-[16/10] md:aspect-video flex items-center justify-center text-center"
                       }`}
                       style={{
@@ -463,7 +463,11 @@ export default function Work() {
                 onClick={() => goTo(i)}
                 aria-label={ariaLabels.goTo(i)}
                 className={`p-0 border-0 cursor-pointer hover:[background:var(--foreground)] ${i === idx ? "[background:var(--foreground)]" : "[background:var(--border)]"}`}
-                style={{ width: 32, height: i === idx ? 2 : 1, transition: "background 0.25s ease, height 0.25s ease" }}
+                style={{
+                  width: 32,
+                  height: i === idx ? 2 : 1,
+                  transition: "background 0.25s ease, height 0.25s ease",
+                }}
               />
             ))}
           </div>
@@ -478,7 +482,12 @@ export default function Work() {
             onClick={() => goTo(i)}
             aria-label={ariaLabels.goTo(i)}
             className={`p-0 border-0 cursor-pointer hover:[background:var(--foreground)] ${i === idx ? "[background:var(--foreground)]" : "[background:rgba(0,0,0,0.1)]"}`}
-            style={{ width: 24, height: i === idx ? 2 : 1, borderRadius: 1, transition: "background 0.25s ease, height 0.25s ease" }}
+            style={{
+              width: 24,
+              height: i === idx ? 2 : 1,
+              borderRadius: 1,
+              transition: "background 0.25s ease, height 0.25s ease",
+            }}
           />
         ))}
       </div>
