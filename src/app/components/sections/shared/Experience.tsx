@@ -62,7 +62,7 @@ export default function Experience() {
           }}
           viewport={{ once: false }}
           transition={{ duration: 0.3 }}
-          className="text-[clamp(3rem,5vw,5rem)] mb-8 italic"
+          className="text-[clamp(3rem,5vw,5rem)] mb-8 italic tracking-normal hover:tracking-wider transition-[letter-spacing] duration-600 cursor-default"
         >
           Experience
         </motion.h2>

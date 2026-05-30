@@ -8,15 +8,23 @@ export default function Contact() {
   const content = lang === "ko" ? koContact : enContact;
 
   return (
-    <section id="contact" aria-label="Contact" className="relative py-32 px-6 md:px-12 text-black">
+    <section
+      id="contact"
+      aria-label="Contact"
+      className="relative py-32 px-6 md:px-12 text-black"
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] } }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
+          }}
           viewport={{ once: false }}
           transition={{ duration: 0.3 }}
         >
-          <h2 className="text-[clamp(3rem,5vw,5rem)] mb-8 tracking-normal italic">
+          <h2 className="text-[clamp(3rem,5vw,5rem)] mb-8 tracking-normal italic hover:tracking-wider transition-[letter-spacing] duration-600 cursor-default">
             {content.heading}
           </h2>
           <p className="text-lg md:text-xl mb-8 md:mb-12 max-w-[60ch] opacity-80 font-light">
