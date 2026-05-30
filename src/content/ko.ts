@@ -7,31 +7,31 @@ export const work = {
   },
   projects: [
     {
-      no: 1,
+      no: 5,
       titleLines: ["모바일 예약상세 페이지 개선:", "iOS/WebView 핸들링"],
       about:
         "iOS Safari 및 인앱 웹뷰 환경에서 PDF 다운로드가 외부 뷰어를 강제로 실행시켜 흐름이 끊기는 문제가 있었습니다. Blob API와 미들웨어를 이용하여 pdf 링크를 우회해서 파일 다운로드가 매끄럽게 연결되도록 UX를 개선시켰습니다.",
     },
     {
-      no: 2,
+      no: 4,
       titleLines: ["모바일 예약상세 페이지 개선:", "Google Maps·네이티브 캘린더 연동"],
       about:
         "예약 상세 페이지에서 여행 장소 및 날짜를, 구글맵과 캘린더 앱으로 딥링크시켜 사용자가 등록할 수 있도록 했습니다. 기존에 예약 후 정보를 복사·붙여넣기하던 번거로운 과정을 대체했습니다.",
     },
     {
-      no: 5,
+      no: 3,
       titleLines: ["최근 검색어: TanStack Query 도입"],
       about:
         "최근 검색어 등록, 삭제, 모두 삭제 기능을 TanStack Query를 도입하여 중복 요청을 줄이고 불필요한 지연 현상을 줄였습니다.",
     },
     {
-      no: 4,
+      no: 2,
       titleLines: ["Redux 기반 재입고 알림"],
       about:
         "캘린더에서 원하는 날짜를 선택하면 재고가 돌아오는 즉시 알림을 받을 수 있는 기능입니다. 다중 모달로 되어있는 기능을, Redux 기반 상태 관리를 통해 효율적으로 클라이언트 데이터를 다루도록 처리했습니다.",
     },
     {
-      no: 3,
+      no: 1,
       titleLines: ["Vue.js → Next.js 마이그레이션"],
       about:
         "서비스 중단 없이 레거시 Vue.js 프론트엔드를 Next.js(App Router)로 재구축했습니다. 아웃소싱으로 인해 스파게티 소스로 이뤄졌던 코드베이스를 React 기반으로 리팩토링하고, SEO 및 성능을 개선해 LightHouse 지표를 큰 폭으로 향상시켰습니다.",

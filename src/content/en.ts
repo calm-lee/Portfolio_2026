@@ -7,31 +7,31 @@ export const work = {
   },
   projects: [
     {
-      no: 1,
+      no: 5,
       titleLines: ["iOS Safari · In-App WebView PDF handling."],
       about:
         "On iOS Safari and embedded in-app webviews, PDF downloads were forced to launch external viewers, breaking users out of the booking context. Re-routed the download path so receipts and itineraries render predictably on every mobile entry point.",
     },
     {
-      no: 2,
+      no: 4,
       titleLines: ["Google Maps · Native Calendar integration."],
       about:
         "Reservation details now deep-link directly into the user's native maps and calendar apps with all metadata pre-filled — replacing the multi-step copy/paste workflow that previously fragmented the post-booking experience.",
     },
     {
-      no: 5,
+      no: 3,
       titleLines: ["Adopting TanStack Query."],
       about:
         "Replaced ad-hoc fetch hooks with TanStack Query across search, detail, and reservation flows — unifying caching, request deduplication, and invalidation. Loading states became consistent and the entire data layer turned predictable.",
     },
     {
-      no: 4,
+      no: 2,
       titleLines: ["Redux-driven restock alerts."],
       about:
         "Designed and built the subscription, polling, and notification layers for a returning-user feature on Redux. Users opt into restock alerts on any listing and are notified the moment availability returns.",
     },
     {
-      no: 3,
+      no: 1,
       titleLines: ["Vue.js → Next.js migration."],
       about:
         "Re-platformed the legacy Vue.js frontend to Next.js (App Router) without service interruption — preserving every existing route, layout, and SEO surface while modernizing the rendering pipeline.",

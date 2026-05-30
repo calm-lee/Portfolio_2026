@@ -16,7 +16,7 @@ type BaseProject = {
 
 const BASE_PROJECTS: BaseProject[] = [
   {
-    no: 1,
+    no: 5,
     category: "Cross-Browser & Device UX",
     skills: ["Next.js Middleware", "Blob API", "AWS S3", "iOS Safari"],
     name: "iOS Safari · In-App WebView PDF handling",
@@ -24,7 +24,7 @@ const BASE_PROJECTS: BaseProject[] = [
     screenshot_category: "mo",
   },
   {
-    no: 2,
+    no: 4,
     category: "Cross-Browser & Device UX",
     skills: [
       "Deep linking",
@@ -37,7 +37,7 @@ const BASE_PROJECTS: BaseProject[] = [
     screenshot_category: "mo",
   },
   {
-    no: 5,
+    no: 3,
     category: "State Management & Performance",
     skills: ["TanStack Query", "Cache strategy", "REST API"],
     name: "Adopting TanStack Query",
@@ -45,7 +45,7 @@ const BASE_PROJECTS: BaseProject[] = [
     screenshot_category: "desktop",
   },
   {
-    no: 4,
+    no: 2,
     category: "State Management & Performance",
     skills: ["Redux", "Responsive Design", "Notifications"],
     name: "Redux-driven restock alerts",
@@ -53,7 +53,7 @@ const BASE_PROJECTS: BaseProject[] = [
     screenshot_category: "desktop",
   },
   {
-    no: 3,
+    no: 1,
     category: "Migration & Optimization",
     skills: ["Next.js App Router", "Vue.js", "SSR", "Lighthouse"],
     name: "Vue.js → Next.js migration",
