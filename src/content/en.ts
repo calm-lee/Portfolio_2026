@@ -60,6 +60,8 @@ export const contact = {
   heading: "Get in touch",
   bodyPrefix: "I'm always happy to connect and explore new opportunities —",
   bodyHighlight: "feel free to reach out!",
+  cvLabel: "CV",
+  cvFile: "chloe_lee_cv.pdf",
 };
 
 export const about = {
