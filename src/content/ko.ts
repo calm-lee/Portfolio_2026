@@ -64,7 +64,7 @@ export const contact = {
   bodyPrefix: "새로운 기회와 아이디어를 나누고 싶으시다면 —",
   bodyHighlight: "언제나 환영합니다!",
   cvLabel: "이력서",
-  cvFile: "euiyeon_lee_resume.pdf",
+  cvFile: "euiyeonlee_resume.pdf",
 };
 
 export const about = {
