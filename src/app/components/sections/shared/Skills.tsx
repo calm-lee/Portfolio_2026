@@ -40,7 +40,7 @@ export default function Skills() {
           }}
           viewport={{ once: false }}
           transition={{ duration: 0.3 }}
-          className="text-[clamp(3rem,5vw,5rem)] mb-16 italic tracking-normal hover:tracking-widest transition-[letter-spacing] duration-600 cursor-default"
+          className="text-[clamp(3rem,5vw,5rem)] mb-16 italic tracking-normal hover:tracking-widest transition-[letter-spacing] duration-400 cursor-default"
         >
           Skills
         </motion.h2>
