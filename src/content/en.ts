@@ -65,7 +65,7 @@ export const contact = {
 export const about = {
   leftParagraphs: [
     "With over 4 years of experience in frontend engineering,",
-    "I specialize in delivering seamless UI/UX regardless of environment.",
+    "I specialize in translating designs into fast, accessible interfaces across browsers and devices.",
   ],
   rightParagraphs: [
     "I approach problems with a user-focused mindset and pay close attention to detail, ensuring even the smallest aspects are carefully considered.",

@@ -4,7 +4,7 @@ import { useLanguage } from "@/app/context/LanguageContext";
 import { about as enAbout } from "@/content/en";
 import { about as koAbout } from "@/content/ko";
 
-const headingLines = ["Focusing on", "Improving", "UI/UX"];
+const headingLines = ["Focusing on", "Improving", "User Experience"];
 const headingDelays = [0, 0.5, 1.0];
 const headingDurations = [0.9, 1.2, 1.2];
 
@@ -15,7 +15,7 @@ export default function About() {
   return (
     <section id="about" aria-label="About" className="py-32 px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-[5fr_5fr] gap-10 md:gap-16 items-center">
+        <div className="grid md:grid-cols-[5fr_5fr] gap-10 md:gap-22 items-center">
           <div className="group w-fit">
             <div className="flex items-stretch gap-5 transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-3">
               <motion.span
@@ -26,7 +26,7 @@ export default function About() {
                 className="w-[3px] shrink-0 origin-top"
                 style={{ backgroundColor: "#d4cfc9" }}
               />
-              <h2 className="text-[clamp(3rem,5vw,5rem)] tracking-normal">
+              <h2 className="text-[clamp(3rem,5vw,5rem)] tracking-tight">
                 {headingLines.map((line, i) => (
                   <motion.span
                     key={i}
