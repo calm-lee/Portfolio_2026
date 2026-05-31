@@ -108,6 +108,21 @@ export default function Work() {
   const visualRef = useRef<HTMLDivElement>(null);
   const [arrowTop, setArrowTop] = useState<number | null>(null);
 
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const [isImageHovered, setIsImageHovered] = useState(false);
+  const panStartRef = useRef<{
+    mx: number;
+    my: number;
+    ox: number;
+    oy: number;
+  } | null>(null);
+
+  useEffect(() => {
+    setPan({ x: 0, y: 0 });
+    setIsImageHovered(false);
+  }, [idx]);
+
   useEffect(() => {
     const measure = () => {
       if (!sliderRef.current || !visualRef.current) return;
@@ -132,6 +147,35 @@ export default function Work() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
+  }, []);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!panStartRef.current) return;
+      const { mx, my, ox, oy } = panStartRef.current;
+      const clamp = (v: number, max: number) =>
+        Math.max(-max, Math.min(max, v));
+      const rect = visualRef.current?.getBoundingClientRect();
+
+      const maxX = rect ? rect.width * 0.25 : 80;
+      const maxY = rect ? rect.height * 0.25 : 60;
+      setPan({
+        x: clamp(ox + e.clientX - mx, maxX),
+        y: clamp(oy + e.clientY - my, maxY),
+      });
+    };
+    const handleUp = () => {
+      if (!panStartRef.current) return;
+      panStartRef.current = null;
+      setIsPanning(false);
+      setPan({ x: 0, y: 0 });
+    };
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseup", handleUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseup", handleUp);
+    };
   }, []);
 
   useEffect(() => {
@@ -171,7 +215,7 @@ export default function Work() {
     <section
       id="work"
       aria-label="Work"
-      className="flex flex-col md:block py-4 md:h-auto md:py-32 md:px-12"
+      className="flex flex-col md:block md:h-screen py-4 md:py-16 md:px-12"
     >
       {/* Mobile header */}
       <header className="flex-none px-5 pt-4 pb-2.5 md:hidden">
@@ -305,10 +349,24 @@ export default function Work() {
                   key={i}
                   className="flex-[0_0_100%] min-w-0 flex flex-col justify-center gap-4 md:h-auto md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center"
                 >
-                  <div className="relative flex-none px-5 md:px-0">
+                  <div
+                    className="relative flex-none px-5 md:px-0"
+                    onMouseEnter={() => setIsImageHovered(true)}
+                    onMouseLeave={() => setIsImageHovered(false)}
+                    onMouseDown={(e) => {
+                      e.stopPropagation();
+                      setIsPanning(true);
+                      panStartRef.current = {
+                        mx: e.clientX,
+                        my: e.clientY,
+                        ox: pan.x,
+                        oy: pan.y,
+                      };
+                    }}
+                  >
                     <div
                       ref={i === 0 ? visualRef : undefined}
-                      className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg ${
+                      className={`group relative border border-border overflow-hidden rounded-[0.625rem] md:rounded-lg md:max-h-[60vh] ${
                         p.screenshot_category === "mo"
                           ? "aspect-[1/0.96] df md:aspect-[1/0.8] flex items-center justify-center py-3 md:py-[2.25rem]"
                           : "aspect-[16/10] md:aspect-video flex items-center justify-center text-center"
@@ -324,22 +382,40 @@ export default function Work() {
                         {pad(p.no)} / {pad(TOTAL)}
                       </span>
                       {p.screenshot_category === "mo" ? (
-                        <div className="relative aspect-[9/19.5] h-[94%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]">
+                        <div className="relative aspect-[9/19.5] h-[100%] flex-none bg-background border border-border rounded-[1.5rem] overflow-hidden shadow-[0_16px_30px_-16px_rgba(0,0,0,0.25)]   transition-transform duration-700 ease-out group-hover:scale-130">
                           <div className="absolute top-[0.45rem] left-1/2 -translate-x-1/2 w-[36%] h-[0.32rem] bg-black/15 rounded-full z-10" />
                           <div className="absolute bottom-[0.45rem] left-1/2 -translate-x-1/2 w-[28%] h-[0.22rem] bg-black/[0.12] rounded-full z-10" />
                           <img
                             src={p.screenshot}
                             alt={p.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover"
                             draggable={false}
+                            style={{
+                              transform: isPanning
+                                ? `translate(${pan.x * 0.5}px, ${pan.y * 0.5}px) scale(1.08)`
+                                : "translate(0px,0px) scale(1)",
+                              transition: isPanning
+                                ? "none"
+                                : "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
+                            }}
                           />
                         </div>
                       ) : (
                         <img
                           src={p.screenshot}
                           alt={p.name}
-                          className="absolute w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          className="absolute w-full h-full object-cover"
                           draggable={false}
+                          style={{
+                            transform: isPanning
+                              ? `translate(${pan.x}px, ${pan.y}px) scale(1.5)`
+                              : isImageHovered
+                                ? "scale(1.5)"
+                                : "scale(1)",
+                            transition: isPanning
+                              ? "none"
+                              : "transform 0.4s ease-out",
+                          }}
                         />
                       )}
                     </div>
