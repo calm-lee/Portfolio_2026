@@ -55,7 +55,7 @@ export default function Skills() {
                 y: 0,
                 transition: {
                   duration: 0.6,
-                  delay: index * 0.2,
+                  delay: index * 0.15,
                   ease: [0.16, 1, 0.3, 1],
                 },
               }}
@@ -66,23 +66,32 @@ export default function Skills() {
               <div className="text-muted-foreground text-sm uppercase tracking-widest pt-1">
                 {skillGroup.category}
               </div>
-              <div className="group/marquee overflow-hidden relative">
-                <div className="flex w-max gap-x-10 [animation:marquee_7s_linear_infinite] group-hover/marquee:[animation-play-state:paused]">
+              <div className="group/marquee overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+                <div className="flex w-max [animation:marquee_5s_linear_infinite] group-hover/marquee:[animation-play-state:paused]">
                   {skillGroup.items.map((skill, i) => (
                     <span
                       key={i}
-                      className="text-sm font-light whitespace-nowrap"
+                      className="text-sm font-light whitespace-nowrap pr-8"
                     >
                       {skill}
+                      <span
+                        aria-hidden="true"
+                        className="ml-8 text-foreground/25 text-[0.6rem]"
+                      >
+                        ·
+                      </span>
                     </span>
                   ))}
                   {skillGroup.items.map((skill, i) => (
                     <span
                       key={`dup-${i}`}
                       aria-hidden="true"
-                      className="text-sm font-light whitespace-nowrap"
+                      className="text-sm font-light whitespace-nowrap pr-8"
                     >
                       {skill}
+                      <span className="ml-8 text-foreground/25 text-[0.6rem]">
+                        ·
+                      </span>
                     </span>
                   ))}
                 </div>
