@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import LanguageToggle from "./components/common/LanguageToggle";
 import ScrollProgressBar from "./components/common/ScrollProgressBar";
 import ScrollToTopButton from "./components/common/ScrollToTopButton";
+import CustomCursor from "./components/common/CustomCursor";
 import Hero from "./components/sections/shared/Hero";
 import Skills from "./components/sections/shared/Skills";
 import Footer from "./components/sections/shared/Footer";
@@ -19,6 +20,7 @@ function EnLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <CustomCursor />
       <ScrollProgressBar />
       <LanguageToggle />
       <ScrollToTopButton />
@@ -42,6 +44,7 @@ function KoLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <CustomCursor />
       <ScrollProgressBar />
       <LanguageToggle />
       <ScrollToTopButton />
